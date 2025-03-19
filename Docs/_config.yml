@@ -1,0 +1,5 @@
+title: Wood Project
+description: Proyecto de arcade retro hecho en madera
+baseurl: "/wood" # Cambia esta línea para que coincida con tu repositorio
+url: "https://chinesexd.github.io" # Tu URL de GitHub Pages
+theme: jekyll-theme-primer
