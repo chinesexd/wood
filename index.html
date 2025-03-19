@@ -68,6 +68,11 @@
                 margin-top: 10px;
             }
         }
+
+   #tipoConversor {
+        width: 150px; /* Ajusta el ancho del select según lo que prefieras */
+        font-size: 14px; /* Puedes ajustar el tamaño de la fuente */
+    }
     </style>
 </head>
 <body>
@@ -173,15 +178,15 @@
     </script>
 
     <h3>Conversores de Medidas</h3>
-    <label for="tipoConversor">Seleccionar Conversor:</label>
-    <select id="tipoConversor" onchange="mostrarConversor()">
-        <option value="none">Elige un Conversor</option>
-        <option value="piesAPulgadas">Pies a Pulgadas</option>
-        <option value="pulgadasAPies">Pulgadas a Pies</option>
-        <option value="metroAPies">Metro a Pies</option>
-        <option value="piesAMetro">Pies a Metro</option>
-        <option value="cmAPulgadas">CM a Pulgadas</option>
-    </select>
+   <label for="tipoConversor">Seleccionar Conversor:</label>
+<select id="tipoConversor" onchange="mostrarConversor()">
+    <option value="none">Elige un Conversor</option>
+    <option value="piesAPulgadas">Pies a Pulgadas</option>
+    <option value="pulgadasAPies">Pulgadas a Pies</option>
+    <option value="metroAPies">Metro a Pies</option>
+    <option value="piesAMetro">Pies a Metro</option>
+    <option value="cmAPulgadas">CM a Pulgadas</option>
+</select>
 
     <!-- Conversores -->
     <div id="piesAPulgadas" class="conversor">
