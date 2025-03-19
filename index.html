@@ -1,2 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Pies Tablares</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 14px; /* Tamaño de fuente más pequeño */
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 6px; /* Reducir el padding */
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .total-final {
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 14px; /* Tamaño más pequeño */
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 4px; /* Reducir el padding de los inputs */
+            font-size: 12px;
+            text-align: right;
+        }
+        button {
+            padding: 8px;
+            margin: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        select, input[type="number"] {
+            font-size: 12px;
+            padding: 5px;
+            width: 80%;
+            margin-bottom: 10px;
+        }
+        .conversor {
+            display: none;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            table {
+                font-size: 12px; /* Asegurarse de que la tabla sea legible */
+            }
+            .total-final, button, input[type="number"], select {
+                font-size: 12px; /* Ajuste de tamaño de fuente */
+                padding: 5px; /* Reducir espacio de los botones y inputs */
+            }
+            .total-final {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Calculadora de Pies Tablares</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Ancho (pulgadas)</th>
+                <th>Largo (pulgadas)</th>
+                <th>Grosor (pulgadas)</th>
+                <th>Cantidad de piezas</th>
+                <th>Total Pies Tablares (BF)</th>
+            </tr>
+        </thead>
+        <tbody id="tabla-body">
+            <tr>
+                <td><input type="number" class="ancho" value="48"></td>
+                <td><input type="number" class="largo" value="96"></td>
+                <td><input type="number" class="grosor" value="1"></td>
+                <td><input type="number" class="cantidad" value="1"></td>
+                <td class="total">0</td>
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="agregarFila()">Agregar Fila</button>
+    <button onclick="calcularPiesTablares()">Calcular</button>
+    <button onclick="borrarTodo()">Borrar Todo</button>
 
-fdlkgjdflkg
+    <div class="total-final">
+        <strong>Total Pies Tablares (BF):</strong> <span id="total-pies">0</span>
+    </div>
+
+    <div class="total-final">
+        <label for="valor-pie">Valor por Pie de Madera:</label>
+        <input type="number" id="valor-pie" value="0">
+        <strong>Total Costo: </strong> <span id="total-costo">0</span>
+    </div>
+
+    <script>
+        function calcularPiesTablares() {
+            let totalPies = 0;
+            document.querySelectorAll("tbody tr").forEach(row => {
+                let ancho = parseFloat(row.querySelector(".ancho").value) || 0;
+                let largo = parseFloat(row.querySelector(".largo").value) || 0;
+                let grosor = parseFloat(row.querySelector(".grosor").value) || 0;
+                let cantidad = parseFloat(row.querySelector(".cantidad").value) || 0;
+                
+                let piesTablares = ((ancho * largo * grosor) / 144) * cantidad;
+                row.querySelector(".total").textContent = piesTablares.toFixed(2);
+                totalPies += piesTablares;  // Sumar al total general
+            });
+
+            // Obtener el valor por pie de madera
+            let valorPie = parseFloat(document.getElementById("valor-pie").value) || 0;
+            
+            // Calcular el costo total multiplicando el total de pies por el valor por pie de madera
+            let totalCosto = totalPies * valorPie;
+
+            // Mostrar el total en la interfaz
+            document.getElementById("total-pies").textContent = totalPies.toFixed(2);
+            document.getElementById("total-costo").textContent = totalCosto.toFixed(2);
+        }
+
+        function agregarFila() {
+            let tabla = document.getElementById("tabla-body");
+            let fila = document.createElement("tr");
+            fila.innerHTML = `
+                <td><input type="number" class="ancho" value="0"></td>
+                <td><input type="number" class="largo" value="0"></td>
+                <td><input type="number" class="grosor" value="0"></td>
+                <td><input type="number" class="cantidad" value="0"></td>
+                <td class="total">0</td>
+            `;
+            tabla.appendChild(fila);
+        }
+
+        function borrarTodo() {
+            // Limpiar los valores de las filas
+            document.querySelectorAll("tbody tr").forEach(row => {
+                row.querySelector(".ancho").value = 0;
+                row.querySelector(".largo").value = 0;
+                row.querySelector(".grosor").value = 0;
+                row.querySelector(".cantidad").value = 0;
+                row.querySelector(".total").textContent = '0';
+            });
+
+            // Limpiar el valor por pie y el costo total
+            document.getElementById("valor-pie").value = 0;
+            document.getElementById("total-pies").textContent = '0';
+            document.getElementById("total-costo").textContent = '0';
+        }
+
+        // Agregar evento para recalcular automáticamente el costo cuando el valor por pie de madera cambie
+        document.getElementById("valor-pie").addEventListener("input", calcularPiesTablares);
+
+        // Llamar la función de calcular automáticamente al cambiar cualquier valor en las filas
+        document.querySelectorAll("input").forEach(input => {
+            input.addEventListener("input", calcularPiesTablares);
+        });
+
+        // Inicializar el cálculo al cargar la página
+        calcularPiesTablares();
+    </script>
+
+    <h3>Conversores de Medidas</h3>
+    <label for="tipoConversor">Seleccionar Conversor:</label>
+    <select id="tipoConversor" onchange="mostrarConversor()">
+        <option value="none">Elige un Conversor</option>
+        <option value="piesAPulgadas">Pies a Pulgadas</option>
+        <option value="pulgadasAPies">Pulgadas a Pies</option>
+        <option value="metroAPies">Metro a Pies</option>
+        <option value="piesAMetro">Pies a Metro</option>
+        <option value="cmAPulgadas">CM a Pulgadas</option>
+    </select>
+
+    <!-- Conversores -->
+    <div id="piesAPulgadas" class="conversor">
+        <label for="piesToPulgadas">Pies a Pulgadas:</label>
+        <input type="number" id="piesToPulgadas" placeholder="Valor en pies">
+        <button onclick="convertirPiesAPulgadas()">Convertir</button>
+        <p id="resultadoPiesAPulgadas"></p>
+    </div>
+
+    <div id="pulgadasAPies" class="conversor">
+        <label for="pulgadasToPies">Pulgadas a Pies:</label>
+        <input type="number" id="pulgadasToPies" placeholder="Valor en pulgadas">
+        <button onclick="convertirPulgadasAPies()">Convertir</button>
+        <p id="resultadoPulgadasAPies"></p>
+    </div>
+
+    <div id="metroAPies" class="conversor">
+        <label for="metroToPies">Metro a Pies:</label>
+        <input type="number" id="metroToPies" placeholder="Valor en metros">
+        <button onclick="convertirMetroAPies()">Convertir</button>
+        <p id="resultadoMetroAPies"></p>
+    </div>
+
+    <div id="piesAMetro" class="conversor">
+        <label for="piesToMetro">Pies a Metro:</label>
+        <input type="number" id="piesToMetro" placeholder="Valor en pies">
+        <button onclick="convertirPiesAMetro()">Convertir</button>
+        <p id="resultadoPiesAMetro"></p>
+    </div>
+
+    <div id="cmAPulgadas" class="conversor">
+        <label for="cmToPulgadas">CM a Pulgadas:</label>
+        <input type="number" id="cmToPulgadas" placeholder="Valor en centímetros">
+        <button onclick="convertirCMAPulgadas()">Convertir</button>
+        <p id="resultadoCMAPulgadas"></p>
+    </div>
+
+    <script>
+        function convertirPiesAPulgadas() {
+            let pies = parseFloat(document.getElementById("piesToPulgadas").value) || 0;
+            let pulgadas = pies * 12;
+            document.getElementById("resultadoPiesAPulgadas").textContent = `${pies} pies = ${pulgadas} pulgadas`;
+        }
+
+        function convertirPulgadasAPies() {
+            let pulgadas = parseFloat(document.getElementById("pulgadasToPies").value) || 0;
+            let pies = pulgadas / 12;
+            document.getElementById("resultadoPulgadasAPies").textContent = `${pulgadas} pulgadas = ${pies.toFixed(2)} pies`;
+        }
+
+        function convertirMetroAPies() {
+            let metros = parseFloat(document.getElementById("metroToPies").value) || 0;
+            let pies = metros * 3.28084;
+            document.getElementById("resultadoMetroAPies").textContent = `${metros} metros = ${pies.toFixed(2)} pies`;
+        }
+
+        function convertirPiesAMetro() {
+            let pies = parseFloat(document.getElementById("piesToMetro").value) || 0;
+            let metros = pies / 3.28084;
+            document.getElementById("resultadoPiesAMetro").textContent = `${pies} pies = ${metros.toFixed(2)} metros`;
+        }
+
+        function convertirCMAPulgadas() {
+            let cm = parseFloat(document.getElementById("cmToPulgadas").value) || 0;
+            let pulgadas = cm / 2.54;
+            document.getElementById("resultadoCMAPulgadas").textContent = `${cm} cm = ${pulgadas.toFixed(2)} pulgadas`;
+        }
+
+        function mostrarConversor() {
+            let tipoConversor = document.getElementById("tipoConversor").value;
+            document.querySelectorAll(".conversor").forEach(function(div) {
+                div.style.display = 'none'; // Ocultar todos los conversores
+            });
+            if (tipoConversor !== "none") {
+                document.getElementById(tipoConversor).style.display = 'block'; // Mostrar el conversor seleccionado
+            }
+        }
+    </script>
+</body>
+</html>
