@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Medidas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        select, input {
+            padding: 10px;
+            width: 100%;
+            margin-top: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Conversor de Medidas</h1>
+    
+    <div class="input-group">
+        <label for="amount">Cantidad:</label>
+        <input type="number" id="amount" placeholder="Introduce la cantidad" />
+    </div>
+
+    <div class="input-group">
+        <label for="fromUnit">De:</label>
+        <select id="fromUnit">
+            <option value="mm">Milímetros</option>
+            <option value="cm">Centímetros</option>
+            <option value="inches">Pulgadas</option>
+            <option value="feet">Pies</option>
+            <option value="meters">Metros</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label for="toUnit">A:</label>
+        <select id="toUnit">
+            <option value="mm">Milímetros</option>
+            <option value="cm">Centímetros</option>
+            <option value="inches">Pulgadas</option>
+            <option value="feet">Pies</option>
+            <option value="meters">Metros</option>
+        </select>
+    </div>
+
+    <button onclick="convert()">Convertir</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    // Tasas de conversión entre unidades con resultados enteros cuando corresponda
+    const conversionRates = {
+        mm: {
+            cm: 0.1,
+            inches: 0.0393701,
+            feet: 0.00328084,
+            meters: 0.001
+        },
+        cm: {
+            mm: 10,
+            inches: 0.393701,
+            feet: 0.0328084,
+            meters: 0.01
+        },
+        inches: {
+            mm: 25.4,
+            cm: 2.54,
+            feet: 1 / 12, // Conversión exacta: 12 pulgadas = 1 pie
+            meters: 0.0254
+        },
+        feet: {
+            mm: 304.8,
+            cm: 30.48,
+            inches: 12,
+            meters: 0.3048
+        },
+        meters: {
+            mm: 1000,
+            cm: 100,
+            inches: 39.3701,
+            feet: 3.28084
+        }
+    };
+
+    // Función para realizar la conversión
+    function convert() {
+        let amount = document.getElementById("amount").value;
+        let fromUnit = document.getElementById("fromUnit").value;
+        let toUnit = document.getElementById("toUnit").value;
+
+        if (!amount) {
+            alert("Por favor, ingresa una cantidad válida.");
+            return;
+        }
+
+        let conversionRate = conversionRates[fromUnit][toUnit];
+        let result = amount * conversionRate;
+
+        // Si estamos convirtiendo de pulgadas a pies o viceversa, hacer la conversión exacta
+        if (fromUnit === "inches" && toUnit === "feet" || fromUnit === "feet" && toUnit === "inches") {
+            result = Math.round(result); // Redondear para obtener un número entero exacto
+        }
+
+        // Mostrar el resultado sin redondeo
+        document.getElementById("result").innerHTML = `${amount} ${getUnitName(fromUnit)} es igual a ${result} ${getUnitName(toUnit)}`;
+    }
+
+    // Función auxiliar para obtener el nombre de la unidad en español
+    function getUnitName(unit) {
+        const units = {
+            mm: "milímetros",
+            cm: "centímetros",
+            inches: "pulgadas",
+            feet: "pies",
+            meters: "metros"
+        };
+        return units[unit];
+    }
+</script>
+
+</body>
+</html>
