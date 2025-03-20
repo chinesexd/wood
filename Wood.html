@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Área del Cajón y Calculadora de Pies Tablares</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, button {
+            margin-bottom: 12px;
+            padding: 8px;
+            font-size: 14px;
+        }
+        .result {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 6px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .total-final {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 4px;
+            font-size: 12px;
+            text-align: right;
+        }
+        button {
+            padding: 8px;
+            margin: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        select, input[type="number"] {
+            font-size: 12px;
+            padding: 5px;
+            width: 80%;
+            margin-bottom: 10px;
+        }
+        .conversor {
+            display: none;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            table {
+                font-size: 12px;
+            }
+            .total-final, button, input[type="number"], select {
+                font-size: 12px;
+                padding: 5px;
+            }
+            .total-final {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sección 1: Cálculo de Área del Cajón -->
+    <div class="container">
+        <h1>Cálculo de Área para Cajón</h1>
+        <label for="height">Altura (pies):</label>
+        <input type="number" id="height" step="0.1" min="0">
+
+        <label for="length">Longitud (pies):</label>
+        <input type="number" id="length" step="0.1" min="0">
+
+        <label for="depth">Profundidad (pies):</label>
+        <input type="number" id="depth" step="0.1" min="0">
+
+        <label for="thickness">Grosor de la madera (pulgadas):</label>
+        <input type="number" id="thickness" step="0.1" min="0">
+
+        <label for="division">¿División interna? (si/no):</label>
+        <input type="text" id="division" placeholder="si/no" maxlength="2">
+
+        <label for="cost">Costo de la madera por pie cuadrado (USD):</label>
+        <input type="number" id="cost" step="0.01" min="0">
+
+        <div class="button-container">
+            <button onclick="calcularArea()">Calcular Área y Costo</button>
+            <button onclick="borrarDatos()">Borrar Todos los Datos</button>
+        </div>
+
+        <div id="resultado" class="result"></div>
+        <div id="resultadoCosto" class="result"></div>
+
+        <h2>Materiales Adicionales</h2>
+
+        <label for="rellenoCantidad">Cantidad de Relleno:</label>
+        <input type="number" id="rellenoCantidad" step="0.1" min="0">
+
+        <label for="rellenoValor">Valor por unidad de Relleno (USD):</label>
+        <input type="number" id="rellenoValor" step="0.01" min="0">
+
+        <label for="pinturaCantidad">Cantidad de Pintura:</label>
+        <input type="number" id="pinturaCantidad" step="0.1" min="0">
+
+        <label for="pinturaValor">Valor por unidad de Pintura (USD):</label>
+        <input type="number" id="pinturaValor" step="0.01" min="0">
+
+        <h3>Cola, Tornillos y Lijas</h3>
+
+        <label for="colaCantidad">Cantidad de Cola:</label>
+        <input type="number" id="colaCantidad" step="0.1" min="0">
+
+        <label for="colaValor">Valor por unidad de Cola (USD):</label>
+        <input type="number" id="colaValor" step="0.01" min="0">
+
+        <label for="tornillosCantidad">Cantidad de Tornillos:</label>
+        <input type="number" id="tornillosCantidad" step="0.1" min="0">
+
+        <label for="tornillosValor">Valor por unidad de Tornillos (USD):</label>
+        <input type="number" id="tornillosValor" step="0.01" min="0">
+
+        <label for="lijasCantidad">Cantidad de Lijas:</label>
+        <input type="number" id="lijasCantidad" step="0.1" min="0">
+
+        <label for="lijasValor">Valor por unidad de Lijas (USD):</label>
+        <input type="number" id="lijasValor" step="0.01" min="0">
+
+        <h3>Otros Materiales</h3>
+        <label for="otrosMaterialesValor">Valor total de Otros Materiales (USD):</label>
+        <input type="number" id="otrosMaterialesValor" step="0.01" min="0">
+
+        <h2>Mano de Obra</h2>
+
+        <label for="manoDeObra">Costo de Mano de Obra (USD):</label>
+        <input type="number" id="manoDeObra" step="0.01" min="0">
+
+        <label for="pulida">Costo de Pulida (USD):</label>
+        <input type="number" id="pulida" step="0.01" min="0">
+
+        <label for="instalacion">Costo de Instalación (USD):</label>
+        <input type="number" id="instalacion" step="0.01" min="0">
+
+        <label for="pintada">Costo de Pintada (USD):</label>
+        <input type="number" id="pintada" step="0.01" min="0">
+
+        <label for="transporte">Costo de Transporte (USD):</label>
+        <input type="number" id="transporte" step="0.01" min="0">
+
+        <label for="otros">Otros costos de Mano de obra (USD):</label>
+        <input type="number" id="otros" step="0.01" min="0">
+
+        <div class="result" id="subtotal"></div>
+        <div class="result" id="total"></div>
+
+        <div class="button-container">
+            <button onclick="calcularArea()">Calcular Total</button>
+            <button onclick="borrarDatos()">Borrar Todos los Datos</button>
+        </div>
+    </div>
+
+    <!-- Sección 2: Calculadora de Pies Tablares -->
+    <div class="container">
+        <h2>Calculadora de Pies Tablares</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ancho (pulgadas)</th>
+                    <th>Largo (pulgadas)</th>
+                    <th>Grosor (pulgadas)</th>
+                    <th>Cantidad de piezas</th>
+                    <th>Total Pies Tablares (BF)</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-body">
+                <tr>
+                    <td><input type="number" class="ancho" value="48"></td>
+                    <td><input type="number" class="largo" value="96"></td>
+                    <td><input type="number" class="grosor" value="1"></td>
+                    <td><input type="number" class="cantidad" value="1"></td>
+                    <td class="total">0</td>
+                </tr>
+            </tbody>
+        </table>
+        <button onclick="agregarFila()">Agregar Fila</button>
+        <button onclick="calcularPiesTablares()">Calcular</button>
+        <button onclick="borrarTabla()">Borrar Tabla</button>
+        <div class="total-final" id="resultadoPiesTablares"></div>
+    </div>
+
+    <script>
+        // Función para agregar filas en la calculadora de pies tablares
+        function agregarFila() {
+            const table = document.getElementById('tabla-body');
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td><input type="number" class="ancho" value="48"></td>
+                <td><input type="number" class="largo" value="96"></td>
+                <td><input type="number" class="grosor" value="1"></td>
+                <td><input type="number" class="cantidad" value="1"></td>
+                <td class="total">0</td>
+            `;
+        }
+
+        // Función para borrar todas las filas de la tabla de pies tablares
+        function borrarTabla() {
+            const table = document.getElementById('tabla-body');
+            table.innerHTML = '';
+            agregarFila(); // Agrega una fila vacía por defecto
+        }
+
+        // Función para calcular pies tablares
+        function calcularPiesTablares() {
+            let totalPiesTablares = 0;
+            const rows = document.getElementById('tabla-body').rows;
+
+            for (let row of rows) {
+                const ancho = parseFloat(row.cells[0].querySelector('input').value);
+                const largo = parseFloat(row.cells[1].querySelector('input').value);
+                const grosor = parseFloat(row.cells[2].querySelector('input').value);
+                const cantidad = parseInt(row.cells[3].querySelector('input').value);
+
+                const piesTablares = (ancho * largo * grosor * cantidad) / 144;
+                row.cells[4].textContent = piesTablares.toFixed(2);
+                totalPiesTablares += piesTablares;
+            }
+
+            document.getElementById('resultadoPiesTablares').textContent = 'Total de Pies Tablares: ' + totalPiesTablares.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
