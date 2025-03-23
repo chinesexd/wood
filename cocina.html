@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cálculo area de Cocinaa</title>
+    <title>Cálculo de Área para Cocina</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,8 +37,7 @@
 
     <div class="container">
         <h1>Cálculo de Área para Cocina</h1>
-                <h3>By Chinese</h3>
-
+        <h3>By Chinese</h3>
         
         <label for="height">Altura (pies):</label>
         <input type="number" id="height" step="0.1" min="0">
@@ -57,6 +56,10 @@
 
         <label for="cost">Costo de la madera por pie cuadrado (USD):</label>
         <input type="number" id="cost" step="0.01" min="0">
+
+        <!-- Nueva entrada para porcentaje extra -->
+        <label for="porcentajeExtra">Porcentaje extra por madera faltante o dañada (%):</label>
+        <input type="number" id="porcentajeExtra" step="0.1" min="0">
 
         <div class="button-container">
             <button onclick="calcularArea()">Calcular Área y Costo</button>
@@ -128,12 +131,14 @@
         <div class="result" id="total"></div>
 
         <div class="button-container">
-            <button onclick="calcularArea()">Calcular Total</button>
+            <button onclick="calcularTotal()">Calcular Total</button>
             <button onclick="borrarDatos()">Borrar Todos los Datos</button>
         </div>
     </div>
 
     <script>
+        let costoMadera = 0;
+
         function calcularArea() {
             // Obtener los valores ingresados
             const height = parseFloat(document.getElementById('height').value);
@@ -142,6 +147,7 @@
             const thickness = parseFloat(document.getElementById('thickness').value);
             const division = document.getElementById('division').value.toLowerCase().trim();
             const cost = parseFloat(document.getElementById('cost').value);
+            const porcentajeExtra = parseFloat(document.getElementById('porcentajeExtra').value) || 0;
 
             // Validación de entradas
             if (height <= 0 || length <= 0 || depth <= 0 || thickness <= 0 || isNaN(cost) || cost <= 0) {
@@ -170,28 +176,29 @@
             // Calcular el costo total de la madera
             const costoTotal = areaTotal * cost;
 
-            // Materiales adicionales
+            // Aplicar el porcentaje extra
+            costoMadera = costoTotal * (1 + porcentajeExtra / 100);
+
+            // Mostrar resultados
+            document.getElementById("resultado").textContent = "Área total: " + areaTotal.toFixed(2) + " pies cuadrados.";
+            document.getElementById("resultadoCosto").textContent = "Costo total de madera (con porcentaje extra): $" + costoMadera.toFixed(2);
+        }
+
+        function calcularTotal() {
+            // Obtener los valores de los materiales adicionales
             const rellenoCantidad = parseFloat(document.getElementById('rellenoCantidad').value) || 0;
             const rellenoValor = parseFloat(document.getElementById('rellenoValor').value) || 0;
             const pinturaCantidad = parseFloat(document.getElementById('pinturaCantidad').value) || 0;
             const pinturaValor = parseFloat(document.getElementById('pinturaValor').value) || 0;
-
-            // Cola, Tornillos y Lijas
             const colaCantidad = parseFloat(document.getElementById('colaCantidad').value) || 0;
             const colaValor = parseFloat(document.getElementById('colaValor').value) || 0;
             const tornillosCantidad = parseFloat(document.getElementById('tornillosCantidad').value) || 0;
             const tornillosValor = parseFloat(document.getElementById('tornillosValor').value) || 0;
             const lijasCantidad = parseFloat(document.getElementById('lijasCantidad').value) || 0;
             const lijasValor = parseFloat(document.getElementById('lijasValor').value) || 0;
-
-            // Otros materiales (solo valor total)
             const otrosMaterialesValor = parseFloat(document.getElementById('otrosMaterialesValor').value) || 0;
 
-            const subtotalMateriales = (rellenoCantidad * rellenoValor) + (pinturaCantidad * pinturaValor) +
-                                        (colaCantidad * colaValor) + (tornillosCantidad * tornillosValor) + 
-                                        (lijasCantidad * lijasValor) + otrosMaterialesValor;
-
-            // Mano de obra
+            // Obtener los valores de la mano de obra
             const manoDeObra = parseFloat(document.getElementById('manoDeObra').value) || 0;
             const pulida = parseFloat(document.getElementById('pulida').value) || 0;
             const instalacion = parseFloat(document.getElementById('instalacion').value) || 0;
@@ -199,46 +206,24 @@
             const transporte = parseFloat(document.getElementById('transporte').value) || 0;
             const otros = parseFloat(document.getElementById('otros').value) || 0;
 
-            const subtotalManoObra = manoDeObra + pulida + instalacion + pintada + transporte + otros;
+            // Calcular el subtotal de materiales y mano de obra
+            const subtotalMateriales = rellenoCantidad * rellenoValor + pinturaCantidad * pinturaValor +
+                colaCantidad * colaValor + tornillosCantidad * tornillosValor + 
+                lijasCantidad * lijasValor + otrosMaterialesValor;
 
-            // Subtotal
-            const subtotal = subtotalMateriales + subtotalManoObra;
+            const subtotalManoDeObra = manoDeObra + pulida + instalacion + pintada + transporte + otros;
 
-            // Total final
-            const total = costoTotal + subtotal;
+            // Calcular el total
+            const totalMaterialesManoDeObra = subtotalMateriales + subtotalManoDeObra;
+            const totalFinal = totalMaterialesManoDeObra + costoMadera;
 
-            // Mostrar los resultados
-            document.getElementById('resultado').textContent = "El área total es: " + areaTotal.toFixed(2) + " pies cuadrados.";
-            document.getElementById('resultadoCosto').textContent = "El costo total de la madera es: $" + costoTotal.toFixed(2);
-            document.getElementById('subtotal').textContent = "Subtotal de Materiales y Mano de Obra: $" + subtotal.toFixed(2);
-            document.getElementById('total').textContent = "Total (Costo de Madera + Materiales y Mano de Obra): $" + total.toFixed(2);
+            // Mostrar el subtotal y total
+            document.getElementById("subtotal").textContent = "Subtotal Materiales y Mano de Obra: $" + totalMaterialesManoDeObra.toFixed(2);
+            document.getElementById("total").textContent = "Total Final (incluyendo costo de madera): $" + totalFinal.toFixed(2);
         }
 
         function borrarDatos() {
-            // Limpiar todos los campos y resultados
-            document.getElementById('height').value = '';
-            document.getElementById('length').value = '';
-            document.getElementById('depth').value = '';
-            document.getElementById('thickness').value = '';
-            document.getElementById('division').value = '';
-            document.getElementById('cost').value = '';
-            document.getElementById('rellenoCantidad').value = '';
-            document.getElementById('rellenoValor').value = '';
-            document.getElementById('pinturaCantidad').value = '';
-            document.getElementById('pinturaValor').value = '';
-            document.getElementById('colaCantidad').value = '';
-            document.getElementById('colaValor').value = '';
-            document.getElementById('tornillosCantidad').value = '';
-            document.getElementById('tornillosValor').value = '';
-            document.getElementById('lijasCantidad').value = '';
-            document.getElementById('lijasValor').value = '';
-            document.getElementById('otrosMaterialesValor').value = '';
-            document.getElementById('manoDeObra').value = '';
-            document.getElementById('pulida').value = '';
-            document.getElementById('instalacion').value = '';
-            document.getElementById('pintada').value = '';
-            document.getElementById('transporte').value = '';
-            document.getElementById('otros').value = '';
+            document.querySelectorAll('input').forEach(input => input.value = '');
             document.getElementById('resultado').textContent = '';
             document.getElementById('resultadoCosto').textContent = '';
             document.getElementById('subtotal').textContent = '';
