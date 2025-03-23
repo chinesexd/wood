@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura - SAJOMA WOOD</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; padding: 0; background-color: #f4f4f4; }
+        .container { width: 90%; max-width: 800px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        .header img { max-width: 100px; }
+        .header div { text-align: right; color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #333; color: white; }
+        .btn { margin-top: 10px; padding: 8px 15px; cursor: pointer; border: none; border-radius: 5px; }
+        .btn-primary { background: #28a745; color: white; }
+        .btn-danger { background: #dc3545; color: white; }
+        .form-group { margin-bottom: 10px; display: flex; justify-content: space-between; }
+        .form-group label { flex: 1; margin-right: 10px; color: #333; font-weight: bold; }
+        input { width: 100%; padding: 5px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 5px; }
+        @media print {
+            .btn { display: none; }
+            input { border: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="logo.png" alt="Logo SAJOMA WOOD">
+            <div>
+                <h2>SAJOMA WOOD</h2>
+                <p>Celular: 809-763-0202</p>
+                <p>Email: crd.199@gmail.com</p>
+            </div>
+        </div>
+        
+        <h3>Datos del Cliente</h3>
+        <div class="form-group">
+            <label>Nombre: <input type="text" id="clienteNombre"></label>
+            <label>Dirección: <input type="text" id="clienteDireccion"></label>
+            <label>Teléfono: <input type="text" id="clienteTelefono"></label>
+        </div>
+        
+        <h3>Detalles de Factura</h3>
+        <table id="factura">
+            <thead>
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Descripción</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                    <th class="btn">Acción</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <button class="btn btn-primary" onclick="agregarFila()">Agregar Artículo</button>
+        
+        <h3>Subtotal: $<span id="subtotalFactura">0.00</span></h3>
+        <label>ITBIS (%): <input type="number" id="itbisPorcentaje" value="18" oninput="actualizarTotalFactura()"></label>
+        <h3>ITBIS: $<span id="itbisFactura">0.00</span></h3>
+        <h3>Total: $<span id="totalFactura">0.00</span></h3>
+        
+        <button class="btn btn-primary" onclick="imprimirPDF()">Imprimir PDF</button>
+    </div>
+    
+    <script>
+        function agregarFila() {
+            let table = document.getElementById("factura").getElementsByTagName('tbody')[0];
+            let newRow = table.insertRow();
+            
+            newRow.innerHTML = `
+                <td><input type="number" class="cantidad" oninput="calcularTotal(this)" value="1"></td>
+                <td><input type="text" class="descripcion"></td>
+                <td><input type="number" class="precio" oninput="calcularTotal(this)" value="0.00"></td>
+                <td class="total">0.00</td>
+                <td class="btn"><button class="btn btn-danger" onclick="eliminarFila(this)">Eliminar</button></td>
+            `;
+        }
+        
+        function calcularTotal(element) {
+            let row = element.parentNode.parentNode;
+            let cantidad = row.querySelector(".cantidad").value;
+            let precio = row.querySelector(".precio").value;
+            let total = cantidad * precio;
+            row.querySelector(".total").innerText = total.toFixed(2);
+            actualizarTotalFactura();
+        }
+        
+        function eliminarFila(button) {
+            let row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+            actualizarTotalFactura();
+        }
+        
+        function actualizarTotalFactura() {
+            let subtotal = 0;
+            document.querySelectorAll(".total").forEach(td => {
+                subtotal += parseFloat(td.innerText);
+            });
+            let itbisPorcentaje = parseFloat(document.getElementById("itbisPorcentaje").value) / 100;
+            let itbis = subtotal * itbisPorcentaje;
+            let total = subtotal + itbis;
+            
+            document.getElementById("subtotalFactura").innerText = subtotal.toFixed(2);
+            document.getElementById("itbisFactura").innerText = itbis.toFixed(2);
+            document.getElementById("totalFactura").innerText = total.toFixed(2);
+        }
+        
+        function imprimirPDF() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
