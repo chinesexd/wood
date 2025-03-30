@@ -19,38 +19,37 @@
         .form-group { margin-bottom: 10px; display: flex; justify-content: space-between; }
         .form-group label { flex: 1; margin-right: 10px; color: #333; font-weight: bold; }
         input { width: 100%; padding: 5px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 5px; }
+        
         @media print {
             .btn { display: none; }
             input { border: none; }
+            th {
+                background-color: #333 !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
         }
     </style>
 </head>
 <body>
-
     <div class="container">
         <div class="header">
-            <img src="logo.png" alt="Logo SAJOMA WOOD" style="width: 150px; height: auto; transform: scale(1.5);">
-
-                      <div>
+            <img src="logo.png" alt="Logo SAJOMA WOOD">
+            <div>
                 <h2>SAJOMA WOOD</h2>
                 <p>Celular: 809-763-0202</p>
                 <p>Email: crd.199@gmail.com</p>
-
-  <h3><input type="text" id="tituloFactura" value="Fecha:" style="font-size: 12px; font-weight: bold; text-align: right; width: 100%; border: none; background: none;"></h3>
-        
+                <h3><input type="text" id="tituloFactura" value="Fecha:" style="font-size: 12px; font-weight: bold; text-align: right; width: 100%; border: none; background: none;"></h3>
             </div>
         </div>
-        
         <h3>Datos del Cliente</h3>
         <div class="form-group">
             <label>Nombre: <input type="text" id="clienteNombre"></label>
             <label>Dirección: <input type="text" id="clienteDireccion"></label>
             <label>Teléfono: <input type="text" id="clienteTelefono"></label>
-
         </div>
-        
         <h3><input type="text" id="tituloFactura" value="Detalles de Cotización" style="font-size: 20px; font-weight: bold; text-align: center; width: 100%; border: none; background: none;"></h3>
-        
         <table id="factura">
             <thead>
                 <tr>
@@ -64,20 +63,16 @@
             <tbody></tbody>
         </table>
         <button class="btn btn-primary" onclick="agregarFila()">Agregar Artículo</button>
-        
         <h3>Subtotal: $<span id="subtotalFactura">0.00</span></h3>
         <label>ITBIS (%): <input type="number" id="itbisPorcentaje" value="18" oninput="actualizarTotalFactura()"></label>
         <h3>ITBIS: $<span id="itbisFactura">0.00</span></h3>
         <h3>Total: $<span id="totalFactura">0.00</span></h3>
-        
         <button class="btn btn-primary" onclick="imprimirPDF()">Imprimir PDF</button>
     </div>
-    
     <script>
         function agregarFila() {
             let table = document.getElementById("factura").getElementsByTagName('tbody')[0];
             let newRow = table.insertRow();
-            
             newRow.innerHTML = `
                 <td><input type="number" class="cantidad" oninput="calcularTotal(this)" value="1"></td>
                 <td><input type="text" class="descripcion"></td>
@@ -86,40 +81,34 @@
                 <td class="btn"><button class="btn btn-danger" onclick="eliminarFila(this)">Eliminar</button></td>
             `;
         }
-        
         function calcularTotal(element) {
             let row = element.parentNode.parentNode;
             let cantidad = row.querySelector(".cantidad").value;
             let precio = row.querySelector(".precio").value;
             let total = cantidad * precio;
-            row.querySelector(".total").innerText = formatNumber(total);  // Aplicamos el formato con comas
+            row.querySelector(".total").innerText = formatNumber(total);
             actualizarTotalFactura();
         }
-        
         function eliminarFila(button) {
             let row = button.parentNode.parentNode;
             row.parentNode.removeChild(row);
             actualizarTotalFactura();
         }
-        
         function actualizarTotalFactura() {
             let subtotal = 0;
             document.querySelectorAll(".total").forEach(td => {
-                subtotal += parseFloat(td.innerText.replace(/,/g, '')); // Eliminar las comas para el cálculo
+                subtotal += parseFloat(td.innerText.replace(/,/g, ''));
             });
             let itbisPorcentaje = parseFloat(document.getElementById("itbisPorcentaje").value) / 100;
             let itbis = subtotal * itbisPorcentaje;
             let total = subtotal + itbis;
-            
             document.getElementById("subtotalFactura").innerText = formatNumber(subtotal);
             document.getElementById("itbisFactura").innerText = formatNumber(itbis);
             document.getElementById("totalFactura").innerText = formatNumber(total);
         }
-
         function formatNumber(number) {
             return number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-        
         function imprimirPDF() {
             window.print();
         }
