@@ -27,19 +27,33 @@
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
-            <img src="logo.png" alt="Logo SAJOMA WOOD" style="width: 150px; height: auto; transform: scale(1.5);">
-
-                      <div>
-                <h2>SAJOMA WOOD</h2>
-                <p>Celular: 809-763-0202</p>
-                <p>Email: crd.199@gmail.com</p>
-
-  <h3><input type="text" id="tituloFactura" value="Fecha:" style="font-size: 12px; font-weight: bold; text-align: right; width: 100%; border: none; background: none;"></h3>
-        
-            </div>
+  <div class="container">
+    <div class="header">
+        <img src="logo.png" alt="Logo SAJOMA WOOD">
+        <div>
+            <h2>SAJOMA WOOD</h2>
+            <p>Celular: 809-763-0202</p>
+            <p>Email: crd.199@gmail.com</p>
+            <h3><input type="text" id="tituloFactura" value="Fecha:" style="font-size: 12px; font-weight: bold; text-align: right; width: 100%; border: none; background: none;"></h3>
         </div>
+    </div>
+</div>
+
+<style>
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    .header img {
+        width: 200px;  /* Ajusta el tamaño del logo */
+        height: auto;
+        max-width: 250px; /* Evita que se haga demasiado grande */
+        flex-shrink: 0; /* Evita que se reduzca si el espacio es pequeño */
+    }
+</style>
         
         <h3>Datos del Cliente</h3>
         <div class="form-group">
