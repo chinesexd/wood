@@ -43,7 +43,8 @@
             <label>Teléfono: <input type="text" id="clienteTelefono"></label>
         </div>
         
-        <h3>Detalles de Cotización</h3>
+        <h3><input type="text" id="tituloFactura" value="Detalles de Cotización" style="font-size: 20px; font-weight: bold; text-align: center; width: 100%; border: none; background: none;"></h3>
+        
         <table id="factura">
             <thead>
                 <tr>
@@ -85,7 +86,7 @@
             let cantidad = row.querySelector(".cantidad").value;
             let precio = row.querySelector(".precio").value;
             let total = cantidad * precio;
-            row.querySelector(".total").innerText = total.toFixed(2);
+            row.querySelector(".total").innerText = formatNumber(total);  // Aplicamos el formato con comas
             actualizarTotalFactura();
         }
         
@@ -98,73 +99,24 @@
         function actualizarTotalFactura() {
             let subtotal = 0;
             document.querySelectorAll(".total").forEach(td => {
-                subtotal += parseFloat(td.innerText);
+                subtotal += parseFloat(td.innerText.replace(/,/g, '')); // Eliminar las comas para el cálculo
             });
             let itbisPorcentaje = parseFloat(document.getElementById("itbisPorcentaje").value) / 100;
             let itbis = subtotal * itbisPorcentaje;
             let total = subtotal + itbis;
             
-            document.getElementById("subtotalFactura").innerText = subtotal.toFixed(2);
-            document.getElementById("itbisFactura").innerText = itbis.toFixed(2);
-            document.getElementById("totalFactura").innerText = total.toFixed(2);
+            document.getElementById("subtotalFactura").innerText = formatNumber(subtotal);
+            document.getElementById("itbisFactura").innerText = formatNumber(itbis);
+            document.getElementById("totalFactura").innerText = formatNumber(total);
+        }
+
+        function formatNumber(number) {
+            return number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
         
         function imprimirPDF() {
             window.print();
         }
     </script>
-
-    <script>
-    function agregarFila() {
-        let table = document.getElementById("factura").getElementsByTagName('tbody')[0];
-        let newRow = table.insertRow();
-        
-        newRow.innerHTML = `
-            <td><input type="number" class="cantidad" oninput="calcularTotal(this)" value="1"></td>
-            <td><input type="text" class="descripcion"></td>
-            <td><input type="number" class="precio" oninput="calcularTotal(this)" value="0.00"></td>
-            <td class="total">0.00</td>
-            <td class="btn"><button class="btn btn-danger" onclick="eliminarFila(this)">Eliminar</button></td>
-        `;
-    }
-    
-    function calcularTotal(element) {
-        let row = element.parentNode.parentNode;
-        let cantidad = row.querySelector(".cantidad").value;
-        let precio = row.querySelector(".precio").value;
-        let total = cantidad * precio;
-        row.querySelector(".total").innerText = formatNumber(total);
-        actualizarTotalFactura();
-    }
-    
-    function eliminarFila(button) {
-        let row = button.parentNode.parentNode;
-        row.parentNode.removeChild(row);
-        actualizarTotalFactura();
-    }
-    
-    function actualizarTotalFactura() {
-        let subtotal = 0;
-        document.querySelectorAll(".total").forEach(td => {
-            subtotal += parseFloat(td.innerText.replace(/,/g, '')); // Remove commas for calculation
-        });
-        let itbisPorcentaje = parseFloat(document.getElementById("itbisPorcentaje").value) / 100;
-        let itbis = subtotal * itbisPorcentaje;
-        let total = subtotal + itbis;
-        
-        document.getElementById("subtotalFactura").innerText = formatNumber(subtotal);
-        document.getElementById("itbisFactura").innerText = formatNumber(itbis);
-        document.getElementById("totalFactura").innerText = formatNumber(total);
-    }
-
-    function formatNumber(number) {
-        return number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-    
-    function imprimirPDF() {
-        window.print();
-    }
-
-
 </body>
 </html>
