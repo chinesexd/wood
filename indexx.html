@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', sans-serif;
-            background-color: #fff7f0;
+            background-color: #f1f9f4;
             color: #333;
             line-height: 1.6;
         }
@@ -25,7 +25,7 @@
         }
 
         header {
-            background: #ff914d;
+            background: #7ed957; /* Verde lima suave */
             color: #fff;
             padding: 1.5rem 0;
             text-align: center;
@@ -78,7 +78,7 @@
         }
 
         .btn {
-            background: #ff914d;
+            background: #7ed957; /* Verde lima suave */
             color: white;
             padding: 0.75rem 1.5rem;
             text-decoration: none;
@@ -89,7 +89,7 @@
         }
 
         .btn:hover {
-            background: #e47022;
+            background: #64c74d; /* Verde lima más oscuro */
         }
 
         section {
@@ -99,7 +99,7 @@
         h2 {
             text-align: center;
             margin-bottom: 2rem;
-            color: #ff914d;
+            color: #7ed957;
         }
 
         .menu-grid {
@@ -140,7 +140,7 @@
         .menu-item .price {
             margin: 0 1rem 1rem;
             font-weight: bold;
-            color: #ff914d;
+            color: #7ed957; /* Verde lima suave */
         }
 
         .controls {
@@ -177,6 +177,31 @@
         @media (max-width: 600px) {
             .hero h1 {
                 font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .menu-item img {
+                height: 180px;
+            }
+
+            .menu-item h3 {
+                font-size: 1.2rem;
+            }
+
+            .menu-item p {
+                font-size: 0.85rem;
+            }
+
+            .menu-item .price {
+                font-size: 1.1rem;
+            }
+
+            .controls input {
+                width: 50px;
             }
         }
     </style>
@@ -224,9 +249,7 @@
                 </div>
             </div>
 
-
-
-      <div class="menu-item">
+            <div class="menu-item">
                 <img src="https://images.unsplash.com/photo-1606788075761-2484f741b124?auto=format&fit=crop&w=800&q=60" alt="Plato 2">
                 <h3>chinese</h3>
                 <p>una delcia</p>
@@ -235,28 +258,6 @@
                     <label>Cantidad: <input type="number" min="0" value="0" data-nombre="Ensalada Nupote" data-precio="6.50"></label>
                 </div>
             </div>
-
-  <div class="menu-item">
-                <img src="https://images.unsplash.com/photo-1606788075761-2484f741b124?auto=format&fit=crop&w=800&q=60" alt="Plato 2">
-                <h3>chinese</h3>
-                <p>una delcia</p>
-                <span class="price">6.50</span>
-                <div class="controls">
-                    <label>Cantidad: <input type="number" min="0" value="0" data-nombre="Ensalada Nupote" data-precio="6.50"></label>
-                </div>
-            </div>
-
-  <div class="menu-item">
-                <img src="https://images.unsplash.com/photo-1606788075761-2484f741b124?auto=format&fit=crop&w=800&q=60" alt="Plato 2">
-                <h3>chinese</h3>
-                <p>una delcia</p>
-                <span class="price">6.50</span>
-                <div class="controls">
-                    <label>Cantidad: <input type="number" min="0" value="0" data-nombre="Ensalada Nupote" data-precio="6.50"></label>
-                </div>
-            </div>
-
-
 
             <div class="menu-item">
                 <img src="https://images.unsplash.com/photo-1598514982846-0b9bfaeb2348?auto=format&fit=crop&w=800&q=60" alt="Plato 3">
@@ -305,28 +306,22 @@
 
     function actualizarResumen() {
         let total = 0;
-        let mensaje = 'Hola! Me gustaría pedir:\n';
-        resumen.innerHTML = '';
-
+        let resumenHTML = '';
         inputs.forEach(input => {
-            const cantidad = parseInt(input.value);
-            const nombre = input.dataset.nombre;
-            const precio = parseFloat(input.dataset.precio);
+            const cantidad = parseInt(input.value) || 0;
             if (cantidad > 0) {
+                const nombre = input.getAttribute('data-nombre');
+                const precio = parseFloat(input.getAttribute('data-precio'));
                 const subtotal = cantidad * precio;
                 total += subtotal;
-                mensaje += `- ${cantidad} x ${nombre} ($${subtotal.toFixed(2)})\n`;
-                const li = document.createElement('li');
-                li.textContent = `${cantidad} x ${nombre} - $${subtotal.toFixed(2)}`;
-                resumen.appendChild(li);
+                resumenHTML += `<li>${nombre} x ${cantidad} - $${subtotal.toFixed(2)}</li>`;
             }
         });
-
+        resumen.innerHTML = resumenHTML;
         totalSpan.textContent = total.toFixed(2);
-        mensaje += `\nTotal: $${total.toFixed(2)}`;
 
-        const numero = '18097630202'; // Reemplaza con tu número
-        btnEnviar.href = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+        const textoPedido = encodeURIComponent(resumenHTML + `<p><strong>Total: $${total.toFixed(2)}</strong></p>`);
+        btnEnviar.href = `https://wa.me/1234567890?text=${textoPedido}`;
     }
 
     inputs.forEach(input => {
