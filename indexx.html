@@ -286,13 +286,19 @@
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 600px) { /* Ajuste para pantallas de celular */
             .menu-container {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr); /* Mostrar 2 columnas en celulares */
             }
 
             .frame {
-                max-width: 100%;
+                max-width: 100%; /* Los frames ocupan el ancho disponible de su celda */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-container {
+                grid-template-columns: 1fr; /* Volver a una columna en pantallas muy pequeñas */
             }
         }
     </style>
@@ -479,221 +485,4 @@
 </head>
 <body>
 
-    <img src="./Menú - Healthy Delicias_files/logo.png" alt="Logo de Healthy Delicias" class="logo">
-    <h1>Menú de Healthy Delicias</h1>
-
-    <div id="mensaje-agregado">¡Se ha agregado a tu carrito al final de la página!</div>
-
-    <div class="menu-container"
-
- id="menu">
-        <div class="frame">
-            <img src="./Menú - Healthy Delicias_files/chocoflan.jpg" alt="Choco-Flan (Porción)" onclick="zoomImagen('chocoflan.jpg')">
-            <div class="frame-content">
-                <h3>Choco-Flan (Porción)</h3>
-                <p>Bizcocho de chocolate y flan cremoso en un solo postre irresistible.</p>
-                <p class="precio">RD$ 150.00</p>
-                <div class="add-controls">
-                    <input type="number" id="cantidad-0" min="1" value="1" aria-label="Cantidad de Choco-Flan (Porción)">
-                    <button class="add-btn" onclick="agregarPedido(0)">Agregar</button>
-                </div>
-            </div>
-        </div>
-        <div class="frame">
-            <img src="./Menú - Healthy Delicias_files/3leche.jpg" alt="Tres Leches con Frutas 9oz" onclick="zoomImagen('3leche.jpg')">
-            <div class="frame-content">
-                <h3>Tres Leches con Frutas 9oz</h3>
-                <p>Bizcocho húmedo bañado en tres leches y cubierto con frutas frescas.</p>
-                <p class="precio">RD$ 70.00</p>
-                <div class="add-controls">
-                    <input type="number" id="cantidad-1" min="1" value="1" aria-label="Cantidad de Tres Leches con Frutas 9oz">
-                    <button class="add-btn" onclick="agregarPedido(1)">Agregar</button>
-                </div>
-            </div>
-        </div>
-        <div class="frame">
-            <img src="./Menú - Healthy Delicias_files/panguineo.jpg" alt="Banana Bread con Chispas de Chocolate (Grande)" onclick="zoomImagen('panguineo.jpg')">
-            <div class="frame-content">
-                <h3>Banana Bread con Chispas de Chocolate (Grande)</h3>
-                <p>Suave y sabroso pan de guineo casero.</p>
-                <p class="precio">RD$ 400.00</p>
-                <div class="add-controls">
-                    <input type="number" id="cantidad-2" min="1" value="1" aria-label="Cantidad de Banana Bread con Chispas de Chocolate (Grande)">
-                    <button class="add-btn" onclick="agregarPedido(2)">Agregar</button>
-                </div>
-            </div>
-        </div>
-        <div class="frame">
-            <img src="./Menú - Healthy Delicias_files/3leche.jpg" alt="Tres Leches con Frutas 9oz (otra vez)" onclick="zoomImagen('3leche.jpg')">
-            <div class="frame-content">
-                <h3>Tres Leches con Frutas 9oz (otra vez)</h3>
-                <p>Pastel tres leches con frutas frescas.</p>
-                <p class="precio">RD$ 70.00</p>
-                <div class="add-controls">
-                    <input type="number" id="cantidad-3" min="1" value="1" aria-label="Cantidad de Tres Leches con Frutas 9oz (otra vez)">
-                    <button class="add-btn" onclick="agregarPedido(3)">Agregar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="pedido-resumen">
-        <h2>Resumen del Pedido</h2>
-        <ul id="lista-pedido"></ul>
-        <p><strong>Total: RD$ <span id="total">0.00</span></strong></p>
-        <a id="whatsapp-btn" href="https://healthydelicias.github.io/by-endulzarte/#" target="_blank">Enviar Pedido por WhatsApp</a>
-    </div>
-
-    <div class="info-section">
-        <h2>Sobre Nosotros</h2>
-        <p>En Healthy Delicias cocinamos con pasión. Comida saludable, ingredientes frescos y un sabor inigualable.</p>
-
-        <h2>Contactos</h2>
-        <p>Dirección: Calle Botoncillo, SAJOMA</p>
-        <p>Teléfono: <a href="tel:+18096780179">809-678-0179</a></p>
-    </div>
-
-    <div class="footer">
-        © 2025 Healthy Delicias. Todos los derechos reservados.
-    </div>
-
-    <script>
-        const productos = [
-            {
-                nombre: 'Choco-Flan (Porción)',
-                precio: 150,
-                imagen: 'chocoflan.jpg',
-                descripcion: 'Bizcocho de chocolate y flan cremoso en un solo postre irresistible.'
-            },
-            {
-                nombre: 'Tres Leches con Frutas 9oz',
-                precio: 70,
-                imagen: '3leche.jpg',
-                descripcion: 'Bizcocho húmedo bañado en tres leches y cubierto con frutas frescas.'
-            },
-            {
-                nombre: 'Banana Bread con Chispas de Chocolate (Grande)',
-                precio: 400,
-                imagen: 'panguineo.jpg',
-                descripcion: 'Suave y sabroso pan de guineo casero.'
-            },
-            {
-                nombre: 'Tres Leches con Frutas 9oz',
-                precio: 70,
-                imagen: '3leche.jpg',
-                descripcion: 'Pastel tres leches con frutas frescas.'
-            }
-        ];
-
-        const carrito = [];
-        const menu = document.getElementById('menu');
-        const listaPedido = document.getElementById('lista-pedido');
-        const totalSpan = document.getElementById('total');
-        const whatsappBtn = document.getElementById('whatsapp-btn');
-        const mensajeAgregado = document.getElementById('mensaje-agregado');
-
-        // Generar el menú dinámicamente
-        productos.forEach((producto, index) => {
-            const frame = document.createElement('div');
-            frame.className = 'frame';
-            frame.innerHTML = `
-                <img src="${producto.imagen}" alt="${producto.nombre}" onclick="zoomImagen('${producto.imagen}')">
-                <div class="frame-content">
-                    <h3>${producto.nombre}</h3>
-                    <p>${producto.descripcion}</p>
-                    <p class="precio">RD$ ${producto.precio.toFixed(2)}</p>
-                    <div class="add-controls">
-                        <input type="number" id="cantidad-${index}" min="1" value="1" aria-label="Cantidad de ${producto.nombre}">
-                        <button class="add-btn" onclick="agregarPedido(${index})">Agregar</button>
-                    </div>
-                </div>
-            `;
-            menu.appendChild(frame);
-        });
-
-        function agregarPedido(index) {
-            const producto = productos[index];
-            const cantidadInput = document.getElementById(`cantidad-${index}`);
-            const cantidad = parseInt(cantidadInput.value);
-            if (cantidad < 1) {
-                cantidadInput.value = 1; // Resetear a 1 si es inválido
-                return;
-            }
-
-            const item = carrito.find(item => item.nombre === producto.nombre);
-            if (item) {
-                item.cantidad += cantidad;
-            } else {
-                carrito.push({ ...producto, cantidad });
-            }
-
-            actualizarResumen();
-            mostrarMensaje();
-        }
-
-        function actualizarResumen() {
-            listaPedido.innerHTML = '';
-            let total = 0;
-            carrito.forEach((item, index) => {
-                const li = document.createElement('li');
-                li.innerHTML = `
-                    <div class="item-details">
-                        ${item.nombre} <span class="item-cantidad">x${item.cantidad}</span>
-                    </div>
-                    <span class="item-precio">RD$ ${(item.precio * item.cantidad).toFixed(2)}</span>
-                    <button class="remove-btn" onclick="eliminarItem(${index})" aria-label="Eliminar ${item.nombre} del carrito">Eliminar</button>
-                `;
-                listaPedido.appendChild(li);
-                total += item.precio * item.cantidad;
-            });
-            totalSpan.textContent = total.toFixed(2);
-
-            // Crear el mensaje para WhatsApp
-            const mensaje = `¡Hola! Quiero hacer un pedido de:\n` +
-                carrito.map(item => `${item.nombre} x${item.cantidad}`).join('\n') +
-                `\n\nTotal: RD$ ${total.toFixed(2)}`;
-
-            // Establecer el enlace de WhatsApp
-            const url = `https://wa.me/18096780179?text=${encodeURIComponent(mensaje)}`;
-            whatsappBtn.setAttribute('href', url);
-        }
-
-        function eliminarItem(index) {
-            carrito.splice(index, 1);
-            actualizarResumen();
-        }
-
-        function mostrarMensaje() {
-            mensajeAgregado.style.display = 'block';
-            setTimeout(() => {
-                mensajeAgregado.style.display = 'none';
-            }, 3000);
-        }
-
-        function zoomImagen(imagen) {
-            const overlay = document.createElement('div');
-            overlay.className = 'zoom-overlay';
-
-            const img = document.createElement('img');
-            img.src = imagen;
-            img.alt = 'Imagen ampliada del producto'; // Mejora de accesibilidad
-
-            const closeBtn = document.createElement('button');
-            closeBtn.textContent = 'Cerrar';
-            closeBtn.onclick = () => document.body.removeChild(overlay);
-
-            overlay.appendChild(img);
-            overlay.appendChild(closeBtn);
-
-            overlay.addEventListener('click', (e) => {
-                if (e.target === overlay) {
-                    document.body.removeChild(overlay);
-                }
-            });
-
-            document.body.appendChild(overlay);
-        }
-    </script>
-
-
-</body></html>
+    <img src="./Menú - Healthy Delicias_files/logo
