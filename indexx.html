@@ -1,240 +1,699 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-kantu="1">
+<div id="in-page-channel-node-id" data-channel-name="in_page_channel_6GEC30"></div>
 <head>
-  <meta charset="UTF-8">
-  <title>Menú - Healthy Delicias</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 20px;
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      color: #4CAF50;
-    }
-    .logo {
-      display: block;
-      margin: 0 auto;
-      width: 150px; /* Ajusta el tamaño del logo */
-      height: auto;
-    }
-    .menu-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      width: 300px;
-      overflow: hidden;
-      text-align: center;
-      transition: transform 0.3s;
-    }
-    .card:hover {
-      transform: scale(1.02);
-    }
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      cursor: pointer;
-    }
-    .card-content {
-      padding: 15px;
-    }
-    .card h3 {
-      margin: 0;
-      color: #333;
-    }
-    .card p {
-      color: #777;
-      font-size: 14px;
-    }
-    .add-btn {
-      background-color: #4CAF50;
-      border: none;
-      color: white;
-      padding: 8px 12px;
-      font-size: 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    .add-btn:hover {
-      background-color: #45a049;
-    }
-    #pedido-resumen {
-      margin-top: 30px;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    #pedido-resumen ul {
-      list-style: none;
-      padding: 0;
-    }
-    #pedido-resumen li {
-      padding: 5px 0;
-      border-bottom: 1px solid #eee;
-    }
-    #whatsapp-btn {
-      display: block;
-      margin: 20px auto 0;
-      background-color: #25D366;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      font-size: 16px;
-      border-radius: 6px;
-      text-decoration: none;
-      text-align: center;
-    }
-    #whatsapp-btn:hover {
-      background-color: #1ebe5d;
-    }
-    input[type="number"] {
-      width: 50px;
-      padding: 5px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    /* Estilo para el zoom */
-    .zoom-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-    .zoom-overlay img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    }
-  </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú - Healthy Delicias</title>
+    <meta name="description" content="Healthy Delicias: comida saludable, postres deliciosos y desayunos únicos en Sajoma.">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h1, h2 {
+            color: #4CAF50;
+            text-align: center;
+            padding: 10px;
+            font-size: 24px;
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto;
+            width: 80%;
+            max-width: 280px;
+            height: auto;
+        }
+
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Mejor para responsividad */
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .frame {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 350px; /* Aumentado un poco el max-width */
+            height: auto; /* Ajuste automático de altura */
+            text-align: center;
+            transition: transform 0.3s;
+            margin: auto;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+            display: flex; /* Para la disposición interna */
+            flex-direction: column; /* Elementos internos en columna */
+        }
+
+        .frame:hover {
+            transform: scale(1.05);
+        }
+
+        .frame img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            cursor: pointer;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .frame-content {
+            padding: 20px;
+            flex-grow: 1; /* Para que el contenido empuje el botón hacia abajo */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Espacio entre el texto y el botón */
+        }
+
+        .frame h3 {
+            font-size: 16px;
+            margin-bottom: 5px; /* Reducido el margen inferior */
+            margin-top: 0; /* Eliminado margen superior innecesario */
+        }
+
+        .frame p {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px; /* Reducido el margen inferior */
+        }
+
+        .precio {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .add-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 15px; /* Añadido margen superior */
+        }
+
+        .add-controls input[type="number"] {
+            width: 50px; /* Reducido el ancho */
+            padding: 8px; /* Aumentado el padding */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .add-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 15px; /* Ajustado el padding */
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            flex-grow: 1; /* Para que el botón ocupe el espacio restante */
+        }
+
+        .add-btn:hover {
+            background-color: #45a049;
+        }
+
+        #pedido-resumen {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 500px;
+            margin: 20px auto;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        #pedido-resumen h2 {
+            font-size: 20px; /* Reducido el tamaño del encabezado */
+            margin-bottom: 15px;
+        }
+
+        #pedido-resumen ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #pedido-resumen li {
+            padding: 8px 0; /* Aumentado el padding vertical */
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #pedido-resumen li:last-child {
+            border-bottom: none;
+        }
+
+        #pedido-resumen .item-details {
+            flex-grow: 1;
+        }
+
+        #pedido-resumen .item-cantidad {
+            margin-left: 10px;
+            color: #777;
+        }
+
+        #pedido-resumen .item-precio {
+            font-weight: bold;
+            margin-left: auto;
+        }
+
+        #pedido-resumen .remove-btn {
+            background: none;
+            border: none;
+            color: #d32f2f;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        #pedido-resumen .remove-btn:hover {
+            color: #b71c1c;
+        }
+
+        #pedido-resumen p strong {
+            font-size: 18px;
+        }
+
+        #whatsapp-btn {
+            display: block;
+            margin: 20px auto 0;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        #whatsapp-btn:hover {
+            background-color: #1ebe5d;
+        }
+
+        .zoom-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .zoom-overlay img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+
+        .zoom-overlay button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+
+        .zoom-overlay button:hover {
+            background-color: #f1f1f1;
+        }
+
+        .info-section {
+            margin: 40px 20px;
+            text-align: center;
+        }
+
+        .info-section h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .info-section p {
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+        /* Estilo del mensaje temporal */
+        #mensaje-agregado {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            z-index: 9999;
+            display: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Estilos de accesibilidad */
+        .frame img[alt=""] { /* Ocultar imágenes sin texto alternativo para lectores de pantalla */
+            visibility: hidden;
+        }
+
+        /* Mejoras responsivas adicionales */
+        @media (max-width: 768px) {
+            .menu-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-container {
+                grid-template-columns: 1fr;
+            }
+
+            .frame {
+                max-width: 100%;
+            }
+        }
+    </style>
+    <style>
+        @keyframes slide-in-one-tap {
+            from {
+                transform: translateY(80px);
+            }
+            to {
+                transform: translateY(0px);
+            }
+        }
+
+        .trust-hide-gracefully {
+            opacity: 0;
+        }
+
+        .trust-wallet-one-tap .hidden {
+            display: none;
+        }
+
+        .trust-wallet-one-tap .semibold {
+            font-weight: 500;
+        }
+
+        .trust-wallet-one-tap .binance-plex {
+            font-family: 'Binance';
+        }
+
+        .trust-wallet-one-tap .rounded-full {
+            border-radius: 50%;
+        }
+
+        .trust-wallet-one-tap .flex {
+            display: flex;
+        }
+
+        .trust-wallet-one-tap .flex-col {
+            flex-direction: column;
+        }
+
+        .trust-wallet-one-tap .items-center {
+            align-items: center;
+        }
+
+        .trust-wallet-one-tap .space-between {
+            justify-content: space-between;
+        }
+
+        .trust-wallet-one-tap .justify-center {
+            justify-content: center;
+        }
+
+        .trust-wallet-one-tap .w-full {
+            width: 100%;
+        }
+
+        .trust-wallet-one-tap .box {
+            transition: all 0.5s cubic-bezier(0, 0, 0, 1.43);
+            animation: slide-in-one-tap 0.5s cubic-bezier(0, 0, 0, 1.43);
+            width: 384px;
+            border-radius: 15px;
+            background: #FFF;
+            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            z-index: 1020;
+        }
+
+        .trust-wallet-one-tap .header {
+            gap: 15px;
+            border-bottom: 1px solid #E6E6E6;
+            padding: 10px 18px;
+        }
+
+        .trust-wallet-one-tap .header .left-items {
+            gap: 15px
+        }
+
+        .trust-wallet-one-tap .header .title {
+            color: #1E2329;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 28px;
+        }
+
+        .trust-wallet-one-tap .header .subtitle {
+            color: #474D57;
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .trust-wallet-one-tap .header .close {
+            color: #1E2329;
+            cursor: pointer;
+        }
+
+        .trust-wallet-one-tap .body {
+            padding: 9px 18px;
+            gap: 10px;
+
+        }
+
+        .trust-wallet-one-tap .body .right-items {
+            gap: 10px;
+            width: 100%;
+        }
+
+        .trust-wallet-one-tap .body .right-items .wallet-title {
+            color: #1E2329;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 20px;
+        }
+
+        .trust-wallet-one-tap .body .right-items .wallet-subtitle {
+            color: #474D57;
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .trust-wallet-one-tap .connect-indicator {
+            gap: 15px;
+            padding: 8px 0;
+        }
+
+        .trust-wallet-one-tap .connect-indicator .flow-icon {
+            color: #474D57;
+        }
+
+        .trust-wallet-one-tap .loading-color {
+            color: #FFF;
+        }
+
+        .trust-wallet-one-tap .button {
+            border-radius: 50px;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            background-color: rgb(5, 0, 255);
+            border-color: rgb(229, 231, 235);
+            cursor: pointer;
+            text-align: center;
+            height: 45px;
+        }
+
+        .trust-wallet-one-tap .button .button-text {
+            color: #FFF;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 20px;
+        }
+
+        .trust-wallet-one-tap .footer {
+            margin: 20px 30px;
+        }
+
+        .trust-wallet-one-tap .check-icon {
+            color: #FFF;
+        }
+
+        @font-face {
+            font-family: 'Binance';
+            src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Regular.otf) format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Binance';
+            src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Medium.otf) format('opentype');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Binance';
+            src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-SemiBold.otf) format('opentype');
+            font-weight: 600;
+            font-style: normal;
+        }
+
+    </style>
 </head>
 <body>
 
-<!-- Logo -->
-<img src="logo.jpg" alt="Healthy Delicias Logo" class="logo"> <!-- Reemplaza con la URL de tu logo -->
+    <img src="./Menú - Healthy Delicias_files/logo.png" alt="Logo de Healthy Delicias" class="logo">
+    <h1>Menú de Healthy Delicias</h1>
 
-<h1>Menú de Healthy Delicias</h1>
+    <div id="mensaje-agregado">¡Se ha agregado a tu carrito al final de la página!</div>
 
-<div class="menu-container" id="menu"></div>
+    <div class="menu-container"
 
-<div id="pedido-resumen">
-  <h2>Resumen del Pedido</h2>
-  <ul id="lista-pedido"></ul>
-  <p><strong>Total: RD$ <span id="total">0.00</span></strong></p>
-  <a id="whatsapp-btn" href="#" target="_blank">Enviar Pedido por WhatsApp</a>
-</div>
+ id="menu">
+        <div class="frame">
+            <img src="./Menú - Healthy Delicias_files/chocoflan.jpg" alt="Choco-Flan (Porción)" onclick="zoomImagen('chocoflan.jpg')">
+            <div class="frame-content">
+                <h3>Choco-Flan (Porción)</h3>
+                <p>Bizcocho de chocolate y flan cremoso en un solo postre irresistible.</p>
+                <p class="precio">RD$ 150.00</p>
+                <div class="add-controls">
+                    <input type="number" id="cantidad-0" min="1" value="1" aria-label="Cantidad de Choco-Flan (Porción)">
+                    <button class="add-btn" onclick="agregarPedido(0)">Agregar</button>
+                </div>
+            </div>
+        </div>
+        <div class="frame">
+            <img src="./Menú - Healthy Delicias_files/3leche.jpg" alt="Tres Leches con Frutas 9oz" onclick="zoomImagen('3leche.jpg')">
+            <div class="frame-content">
+                <h3>Tres Leches con Frutas 9oz</h3>
+                <p>Bizcocho húmedo bañado en tres leches y cubierto con frutas frescas.</p>
+                <p class="precio">RD$ 70.00</p>
+                <div class="add-controls">
+                    <input type="number" id="cantidad-1" min="1" value="1" aria-label="Cantidad de Tres Leches con Frutas 9oz">
+                    <button class="add-btn" onclick="agregarPedido(1)">Agregar</button>
+                </div>
+            </div>
+        </div>
+        <div class="frame">
+            <img src="./Menú - Healthy Delicias_files/panguineo.jpg" alt="Banana Bread con Chispas de Chocolate (Grande)" onclick="zoomImagen('panguineo.jpg')">
+            <div class="frame-content">
+                <h3>Banana Bread con Chispas de Chocolate (Grande)</h3>
+                <p>Suave y sabroso pan de guineo casero.</p>
+                <p class="precio">RD$ 400.00</p>
+                <div class="add-controls">
+                    <input type="number" id="cantidad-2" min="1" value="1" aria-label="Cantidad de Banana Bread con Chispas de Chocolate (Grande)">
+                    <button class="add-btn" onclick="agregarPedido(2)">Agregar</button>
+                </div>
+            </div>
+        </div>
+        <div class="frame">
+            <img src="./Menú - Healthy Delicias_files/3leche.jpg" alt="Tres Leches con Frutas 9oz (otra vez)" onclick="zoomImagen('3leche.jpg')">
+            <div class="frame-content">
+                <h3>Tres Leches con Frutas 9oz (otra vez)</h3>
+                <p>Pastel tres leches con frutas frescas.</p>
+                <p class="precio">RD$ 70.00</p>
+                <div class="add-controls">
+                    <input type="number" id="cantidad-3" min="1" value="1" aria-label="Cantidad de Tres Leches con Frutas 9oz (otra vez)">
+                    <button class="add-btn" onclick="agregarPedido(3)">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<script>
-  const productos = [
-    {
-      nombre: 'Choco-Flan',
-      precio: 180,
-      imagen: 'https://tse1.mm.bing.net/th?id=OIP.vuy1QZ1pAmGykMjsro2r1gHaDt&pid=Api'
-    },
-    {
-      nombre: 'Tres Leches con Frutas',
-      precio: 200,
-      imagen: 'https://tse2.mm.bing.net/th?id=OIP.rBrROjquZkXwpTvPWlek_AHaEK&pid=Api'
-    },
-    {
-      nombre: 'Pan de Guineo',
-      precio: 120,
-      imagen: 'https://tse1.mm.bing.net/th?id=OIP.Vlp98xR2E3mIlkfpLAPkYQHaGL&cb=iwp&pid=Api'
-    }
-  ];
+    <div id="pedido-resumen">
+        <h2>Resumen del Pedido</h2>
+        <ul id="lista-pedido"></ul>
+        <p><strong>Total: RD$ <span id="total">0.00</span></strong></p>
+        <a id="whatsapp-btn" href="https://healthydelicias.github.io/by-endulzarte/#" target="_blank">Enviar Pedido por WhatsApp</a>
+    </div>
 
-  const carrito = [];
-  const menu = document.getElementById('menu');
-  const listaPedido = document.getElementById('lista-pedido');
-  const totalSpan = document.getElementById('total');
-  const whatsappBtn = document.getElementById('whatsapp-btn');
+    <div class="info-section">
+        <h2>Sobre Nosotros</h2>
+        <p>En Healthy Delicias cocinamos con pasión. Comida saludable, ingredientes frescos y un sabor inigualable.</p>
 
-  // Mostrar productos
-  productos.forEach((producto, index) => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-      <img src="${producto.imagen}" alt="${producto.nombre}" onclick="zoomImagen('${producto.imagen}')">
-      <div class="card-content">
-        <h3>${producto.nombre}</h3>
-        <p>RD$ ${producto.precio.toFixed(2)}</p>
-        <input type="number" id="cantidad-${index}" min="1" value="1">
-        <br>
-        <button class="add-btn" onclick="agregarPedido(${index})">Agregar</button>
-      </div>
-    `;
-    menu.appendChild(card);
-  });
+        <h2>Contactos</h2>
+        <p>Dirección: Calle Botoncillo, SAJOMA</p>
+        <p>Teléfono: <a href="tel:+18096780179">809-678-0179</a></p>
+    </div>
 
-  function agregarPedido(index) {
-    const producto = productos[index];
-    const cantidad = parseInt(document.getElementById(`cantidad-${index}`).value);
-    if (cantidad < 1) return;
+    <div class="footer">
+        © 2025 Healthy Delicias. Todos los derechos reservados.
+    </div>
 
-    const existente = carrito.find(p => p.nombre === producto.nombre);
-    if (existente) {
-      existente.cantidad += cantidad;
-    } else {
-      carrito.push({ nombre: producto.nombre, precio: producto.precio, cantidad });
-    }
+    <script>
+        const productos = [
+            {
+                nombre: 'Choco-Flan (Porción)',
+                precio: 150,
+                imagen: 'chocoflan.jpg',
+                descripcion: 'Bizcocho de chocolate y flan cremoso en un solo postre irresistible.'
+            },
+            {
+                nombre: 'Tres Leches con Frutas 9oz',
+                precio: 70,
+                imagen: '3leche.jpg',
+                descripcion: 'Bizcocho húmedo bañado en tres leches y cubierto con frutas frescas.'
+            },
+            {
+                nombre: 'Banana Bread con Chispas de Chocolate (Grande)',
+                precio: 400,
+                imagen: 'panguineo.jpg',
+                descripcion: 'Suave y sabroso pan de guineo casero.'
+            },
+            {
+                nombre: 'Tres Leches con Frutas 9oz',
+                precio: 70,
+                imagen: '3leche.jpg',
+                descripcion: 'Pastel tres leches con frutas frescas.'
+            }
+        ];
 
-    mostrarPedido();
-  }
+        const carrito = [];
+        const menu = document.getElementById('menu');
+        const listaPedido = document.getElementById('lista-pedido');
+        const totalSpan = document.getElementById('total');
+        const whatsappBtn = document.getElementById('whatsapp-btn');
+        const mensajeAgregado = document.getElementById('mensaje-agregado');
 
-  function mostrarPedido() {
-    listaPedido.innerHTML = '';
-    let total = 0;
+        // Generar el menú dinámicamente
+        productos.forEach((producto, index) => {
+            const frame = document.createElement('div');
+            frame.className = 'frame';
+            frame.innerHTML = `
+                <img src="${producto.imagen}" alt="${producto.nombre}" onclick="zoomImagen('${producto.imagen}')">
+                <div class="frame-content">
+                    <h3>${producto.nombre}</h3>
+                    <p>${producto.descripcion}</p>
+                    <p class="precio">RD$ ${producto.precio.toFixed(2)}</p>
+                    <div class="add-controls">
+                        <input type="number" id="cantidad-${index}" min="1" value="1" aria-label="Cantidad de ${producto.nombre}">
+                        <button class="add-btn" onclick="agregarPedido(${index})">Agregar</button>
+                    </div>
+                </div>
+            `;
+            menu.appendChild(frame);
+        });
 
-    carrito.forEach(item => {
-      const subtotal = item.precio * item.cantidad;
-      total += subtotal;
+        function agregarPedido(index) {
+            const producto = productos[index];
+            const cantidadInput = document.getElementById(`cantidad-${index}`);
+            const cantidad = parseInt(cantidadInput.value);
+            if (cantidad < 1) {
+                cantidadInput.value = 1; // Resetear a 1 si es inválido
+                return;
+            }
 
-      const li = document.createElement('li');
-      li.textContent = `${item.nombre} x${item.cantidad} = RD$ ${subtotal.toFixed(2)}`;
-      listaPedido.appendChild(li);
-    });
+            const item = carrito.find(item => item.nombre === producto.nombre);
+            if (item) {
+                item.cantidad += cantidad;
+            } else {
+                carrito.push({ ...producto, cantidad });
+            }
 
-    totalSpan.textContent = total.toFixed(2);
+            actualizarResumen();
+            mostrarMensaje();
+        }
 
-    const mensaje = encodeURIComponent("Hola, quiero ordenar:\n" + 
-      carrito.map(item => `• ${item.nombre} x${item.cantidad} = RD$ ${item.precio * item.cantidad}`).join('\n') +
-      `\nTotal: RD$ ${total.toFixed(2)}`
-    );
+        function actualizarResumen() {
+            listaPedido.innerHTML = '';
+            let total = 0;
+            carrito.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <div class="item-details">
+                        ${item.nombre} <span class="item-cantidad">x${item.cantidad}</span>
+                    </div>
+                    <span class="item-precio">RD$ ${(item.precio * item.cantidad).toFixed(2)}</span>
+                    <button class="remove-btn" onclick="eliminarItem(${index})" aria-label="Eliminar ${item.nombre} del carrito">Eliminar</button>
+                `;
+                listaPedido.appendChild(li);
+                total += item.precio * item.cantidad;
+            });
+            totalSpan.textContent = total.toFixed(2);
 
-    whatsappBtn.href = `https://wa.me/1XXXXXXXXXX?text=${mensaje}`; // Reemplaza con tu número real
-  }
+            // Crear el mensaje para WhatsApp
+            const mensaje = `¡Hola! Quiero hacer un pedido de:\n` +
+                carrito.map(item => `${item.nombre} x${item.cantidad}`).join('\n') +
+                `\n\nTotal: RD$ ${total.toFixed(2)}`;
 
-  function zoomImagen(imagenURL) {
-    const overlay = document.createElement('div');
-    overlay.className = 'zoom-overlay';
-    overlay.innerHTML = `<img src="${imagenURL}" alt="Zoom" onclick="document.body.removeChild(this.parentNode)">`;
-    document.body.appendChild(overlay);
-  }
-</script>
+            // Establecer el enlace de WhatsApp
+            const url = `https://wa.me/18096780179?text=${encodeURIComponent(mensaje)}`;
+            whatsappBtn.setAttribute('href', url);
+        }
 
-</body>
-</html>
+        function eliminarItem(index) {
+            carrito.splice(index, 1);
+            actualizarResumen();
+        }
+
+        function mostrarMensaje() {
+            mensajeAgregado.style.display = 'block';
+            setTimeout(() => {
+                mensajeAgregado.style.display = 'none';
+            }, 3000);
+        }
+
+        function zoomImagen(imagen) {
+            const overlay = document.createElement('div');
+            overlay.className = 'zoom-overlay';
+
+            const img = document.createElement('img');
+            img.src = imagen;
+            img.alt = 'Imagen ampliada del producto'; // Mejora de accesibilidad
+
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = 'Cerrar';
+            closeBtn.onclick = () => document.body.removeChild(overlay);
+
+            overlay.appendChild(img);
+            overlay.appendChild(closeBtn);
+
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    document.body.removeChild(overlay);
+                }
+            });
+
+            document.body.appendChild(overlay);
+        }
+    </script>
+
+
+</body></html>
