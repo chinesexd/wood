@@ -158,12 +158,11 @@
       });
       mensaje += `Total: $${total}`;
 
-      const telefono = "18097620202"; // Tu número de WhatsApp con código de país
-      const url = `https://wa.me/$18097630202text=${encodeURIComponent(mensaje)}`;
+      const telefono = "18097630202"; // Tu número actualizado
+      const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
     }
 
-    // Filtro por categoría
     document.getElementById("categoria").addEventListener("change", function () {
       const seleccion = this.value;
       const productos = document.querySelectorAll(".producto");
