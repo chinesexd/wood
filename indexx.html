@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menú - Healthy Delicias</title>
-  <meta name="description" content="Healthy Delicias: comida saludable, postres deliciosos y desayunos únicos en Sajoma.">
+  <meta name="description" content="Healthy Delicias: comida saludable, postres deliciosos y desayunos únicos en Sajoma." />
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -120,6 +120,22 @@
     #pedido-resumen li {
       padding: 5px 0;
       border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #pedido-resumen li button {
+      background-color: #ff0000;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #pedido-resumen li button:hover {
+      background-color: #cc0000;
     }
 
     #whatsapp-btn {
@@ -137,6 +153,22 @@
 
     #whatsapp-btn:hover {
       background-color: #1ebe5d;
+    }
+
+    /* Estilo del mensaje temporal */
+    #mensaje-agregado {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      z-index: 9999;
+      display: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
 
     .zoom-overlay {
@@ -184,42 +216,23 @@
       padding: 20px;
       margin-top: 40px;
     }
-
-    /* Estilo del mensaje temporal */
-    #mensaje-agregado {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 16px;
-      z-index: 9999;
-      display: none;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    }
-
   </style>
 </head>
 <body>
 
-  <img src="./Menú - Healthy Delicias3_files/logo.png" alt="Logo de Healthy Delicias" class="logo">
+  <img src="logo.png" alt="Logo de Healthy Delicias" class="logo">
   <h1>Menú de Healthy Delicias</h1>
 
   <!-- Mensaje de agregado al carrito -->
   <div id="mensaje-agregado">¡Se ha agregado a tu carrito al final de la página!</div>
 
-  <div class="menu-container" id="menu">
-    <!-- Aquí van los productos del menú como antes -->
-  </div>
+  <div class="menu-container" id="menu"></div>
 
   <div id="pedido-resumen">
     <h2>Resumen del Pedido</h2>
     <ul id="lista-pedido"></ul>
     <p><strong>Total: RD$ <span id="total">0.00</span></strong></p>
-    <a id="whatsapp-btn" href="https://healthydelicias.github.io/by-endulzarte/#" target="_blank">Enviar Pedido por WhatsApp</a>
+    <a id="whatsapp-btn" href="#" target="_blank">Enviar Pedido por WhatsApp</a>
   </div>
 
   <div class="info-section">
@@ -228,7 +241,7 @@
     
     <h2>Contactos</h2>
     <p>Dirección: Calle Botoncillo, SAJOMA</p>
-    <p>Teléfono: 809-678-0179<a href="http://voice.google.com/calls?a=nc,%2B18096780179" class="gv-tel-link" target="_blank" rel="noopener" title="Call +1 809-678-0179 via Google Voice"></a></p>
+    <p>Teléfono: 809-678-0179</p>
   </div>
 
   <div class="footer">
@@ -237,10 +250,30 @@
 
   <script>
     const productos = [
-      { nombre: 'Choco-Flan (Porción)', precio: 150, imagen: 'chocoflan.jpg', descripcion: 'Bizcocho de chocolate y flan cremoso en un solo postre irresistible.' },
-      { nombre: 'Tres Leches con Frutas 9oz', precio: 70, imagen: '3leche.jpg', descripcion: 'Bizcocho húmedo bañado en tres leches y cubierto con frutas frescas.' },
-      { nombre: 'Banana Bread con Chispas de Chocolate (Grande)', precio: 400, imagen: 'panguineo.jpg', descripcion: 'Suave y sabroso pan de guineo casero.' },
-      { nombre: 'Tres Leches con Frutas 9oz', precio: 70, imagen: '3leche.jpg', descripcion: 'Pastel tres leches con frutas frescas.' }
+      {
+        nombre: 'Choco-Flan (Porción)',
+        precio: 150,
+        imagen: 'chocoflan.jpg',
+        descripcion: 'Bizcocho de chocolate y flan cremoso en un solo postre irresistible.'
+      },
+      {
+        nombre: 'Tres Leches con Frutas 9oz',
+        precio: 70,
+        imagen: '3leche.jpg',
+        descripcion: 'Bizcocho húmedo bañado en tres leches y cubierto con frutas frescas.'
+      },
+      {
+        nombre: 'Banana Bread con Chispas de Chocolate (Grande)',
+        precio: 400,
+        imagen: 'panguineo.jpg',
+        descripcion: 'Suave y sabroso pan de guineo casero.'
+      },
+      {
+        nombre: 'Tres Leches con Frutas 9oz',
+        precio: 70,
+        imagen: '3leche.jpg',
+        descripcion: 'Pastel tres leches con frutas frescas.'
+      }
     ];
 
     const carrito = [];
@@ -250,6 +283,7 @@
     const whatsappBtn = document.getElementById('whatsapp-btn');
     const mensajeAgregado = document.getElementById('mensaje-agregado');
 
+    // Asegúrate de que el menú se carga correctamente
     productos.forEach((producto, index) => {
       const frame = document.createElement('div');
       frame.className = 'frame';
@@ -259,67 +293,64 @@
           <h3>${producto.nombre}</h3>
           <p>${producto.descripcion}</p>
           <p>RD$ ${producto.precio.toFixed(2)}</p>
-          <input type="number" min="1" id="cantidad-${index}" value="1">
-          <button class="add-btn" onclick="agregarAlCarrito('${producto.nombre}', ${producto.precio}, document.getElementById('cantidad-${index}').value)">Agregar al carrito</button>
+          <input type="number" id="cantidad-${index}" min="1" value="1">
+          <button class="add-btn" onclick="agregarPedido(${index})">Agregar al carrito</button>
         </div>
       `;
       menu.appendChild(frame);
     });
 
-    function agregarAlCarrito(nombre, precio, cantidad) {
-      cantidad = parseInt(cantidad);
-      const articulo = { nombre, precio, cantidad };
-      carrito.push(articulo);
-      actualizarResumen();
-      mostrarMensaje('¡Artículo agregado al carrito!');
-    }
+    function agregarPedido(index) {
+      const cantidad = document.getElementById(`cantidad-${index}`).value;
+      const producto = productos[index];
+      const totalProducto = producto.precio * cantidad;
 
-    function mostrarMensaje(mensaje) {
-      mensajeAgregado.textContent = mensaje;
+      carrito.push({ ...producto, cantidad, total: totalProducto });
+
+      // Actualizar resumen
+      actualizarResumen();
+      // Mostrar mensaje de agregado
       mensajeAgregado.style.display = 'block';
       setTimeout(() => {
         mensajeAgregado.style.display = 'none';
       }, 2000);
     }
 
-    function actualizarResumen() {
-      listaPedido.innerHTML = '';
-      let total = 0;
-
-      carrito.forEach((item, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          ${item.nombre} x${item.cantidad} - RD$ ${(item.precio * item.cantidad).toFixed(2)} 
-          <button onclick="eliminarArticulo(${index})">Eliminar</button>
-        `;
-        listaPedido.appendChild(li);
-        total += item.precio * item.cantidad;
-      });
-
-      totalSpan.textContent = total.toFixed(2);
-
-      const mensaje = `¡Hola! Quiero hacer un pedido de:\n` +
-        carrito.map(item => `${item.nombre} x${item.cantidad}`).join('\n') +
-        `\n\nTotal: RD$ ${total.toFixed(2)}`;
-
-      const url = `https://wa.me/18096780179?text=${encodeURIComponent(mensaje)}`;
-      whatsappBtn.setAttribute('href', url);
-    }
-
-    function eliminarArticulo(index) {
+    function eliminarDelCarrito(index) {
       carrito.splice(index, 1);
       actualizarResumen();
     }
 
+    function actualizarResumen() {
+      listaPedido.innerHTML = '';
+      let total = 0;
+      carrito.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `${item.nombre} - ${item.cantidad} x RD$ ${item.precio.toFixed(2)} = RD$ ${item.total.toFixed(2)} 
+          <button onclick="eliminarDelCarrito(${index})">Eliminar</button>`;
+        listaPedido.appendChild(li);
+        total += item.total;
+      });
+      totalSpan.textContent = total.toFixed(2);
+      whatsappBtn.href = `https://wa.me/18096780179?text=Quiero%20hacer%20un%20pedido%20de%20los%20siguientes%20productos:%20${encodeURIComponent(carrito.map(item => `${item.nombre} - ${item.cantidad} x RD$ ${item.precio.toFixed(2)}`).join('%0A'))}`;
+    }
+
     function zoomImagen(imagen) {
-      document.getElementById('zoom-img').src = imagen;
-      document.getElementById('zoom-overlay').style.display = 'flex';
+      const overlay = document.createElement('div');
+      overlay.className = 'zoom-overlay';
+      overlay.innerHTML = `
+        <img src="${imagen}" alt="Zoomed image">
+        <button onclick="cerrarZoom()">Cerrar</button>
+      `;
+      document.body.appendChild(overlay);
     }
 
     function cerrarZoom() {
-      document.getElementById('zoom-overlay').style.display = 'none';
+      const overlay = document.querySelector('.zoom-overlay');
+      if (overlay) {
+        overlay.remove();
+      }
     }
   </script>
-
 </body>
 </html>
