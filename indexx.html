@@ -326,23 +326,29 @@ function actualizarResumen() {
   let total = 0;
 
   carrito.forEach((item, index) => {
-    const li = document.createElement('li');
-    li.innerHTML = `${item.nombre} - ${item.cantidad} x RD$ ${item.precio.toFixed(2)} = RD$ ${item.total.toFixed(2)} 
-      <button onclick="eliminarDelCarrito(${index})">Eliminar</button>`;
-    listaPedido.appendChild(li);
     total += item.total;
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+      ${item.nombre} x${item.cantidad} - RD$${item.total.toFixed(2)}
+      <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
+    `;
+    listaPedido.appendChild(li);
   });
 
   totalSpan.textContent = total.toFixed(2);
 
-  // Creación del mensaje de WhatsApp
-  const mensaje = carrito.map(item => `${item.nombre} - ${item.cantidad} x RD$ ${item.precio.toFixed(2)} = RD$ ${item.total.toFixed(2)}`).join('%0A');
-  
-  // Agregar el total al final del mensaje
-  const mensajeConTotal = `${mensaje}%0A%0ATotal%20a%20pagar%3A%20RD$%20${total.toFixed(2)}`;
+  // Generar mensaje de WhatsApp
+  let mensaje = 'Hola, me gustaría hacer el siguiente pedido:\n\n';
+  carrito.forEach(item => {
+    mensaje += `- ${item.nombre} x${item.cantidad} (RD$${item.total.toFixed(2)})\n`;
+  });
+  mensaje += `\nTotal: RD$${total.toFixed(2)}\n\nGracias.`;
 
-  // Enlace con el mensaje actualizado
-  whatsappBtn.href = `https://wa.me/18096780179?text=Quiero%20hacer%20un%20pedido%20de%20los%20siguientes%20productos:%0A${mensajeConTotal}`;
+  // Codificar y actualizar el enlace
+  const telefono = '18096780179'; // Número sin guiones ni espacios
+  const enlace = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+  whatsappBtn.href = enlace;
 }
     function zoomImagen(imagen) {
       const overlay = document.createElement('div');
