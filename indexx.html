@@ -1,488 +1,310 @@
 <!DOCTYPE html>
-<html lang="es" data-kantu="1">
-<div id="in-page-channel-node-id" data-channel-name="in_page_channel_6GEC30"></div>
+<html lang="es">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú - Healthy Delicias</title>
-    <meta name="description" content="Healthy Delicias: comida saludable, postres deliciosos y desayunos únicos en Sajoma.">
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-
-        h1, h2 {
-            color: #4CAF50;
-            text-align: center;
-            padding: 10px;
-            font-size: 24px;
-        }
-
-        .logo {
-            display: block;
-            margin: 0 auto;
-            width: 80%;
-            max-width: 280px;
-            height: auto;
-        }
-
-        .menu-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Mejor para responsividad */
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .frame {
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 350px; /* Aumentado un poco el max-width */
-            height: auto; /* Ajuste automático de altura */
-            text-align: center;
-            transition: transform 0.3s;
-            margin: auto;
-            overflow: hidden;
-            border: 1px solid #e0e0e0;
-            display: flex; /* Para la disposición interna */
-            flex-direction: column; /* Elementos internos en columna */
-        }
-
-        .frame:hover {
-            transform: scale(1.05);
-        }
-
-        .frame img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            cursor: pointer;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-            margin-bottom: 10px;
-        }
-
-        .frame-content {
-            padding: 20px;
-            flex-grow: 1; /* Para que el contenido empuje el botón hacia abajo */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Espacio entre el texto y el botón */
-        }
-
-        .frame h3 {
-            font-size: 16px;
-            margin-bottom: 5px; /* Reducido el margen inferior */
-            margin-top: 0; /* Eliminado margen superior innecesario */
-        }
-
-        .frame p {
-            font-size: 14px;
-            color: #777;
-            margin-bottom: 10px; /* Reducido el margen inferior */
-        }
-
-        .precio {
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .add-controls {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-top: 15px; /* Añadido margen superior */
-        }
-
-        .add-controls input[type="number"] {
-            width: 50px; /* Reducido el ancho */
-            padding: 8px; /* Aumentado el padding */
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            text-align: center;
-        }
-
-        .add-btn {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 10px 15px; /* Ajustado el padding */
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            flex-grow: 1; /* Para que el botón ocupe el espacio restante */
-        }
-
-        .add-btn:hover {
-            background-color: #45a049;
-        }
-
-        #pedido-resumen {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            max-width: 500px;
-            margin: 20px auto;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
-        #pedido-resumen h2 {
-            font-size: 20px; /* Reducido el tamaño del encabezado */
-            margin-bottom: 15px;
-        }
-
-        #pedido-resumen ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        #pedido-resumen li {
-            padding: 8px 0; /* Aumentado el padding vertical */
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        #pedido-resumen li:last-child {
-            border-bottom: none;
-        }
-
-        #pedido-resumen .item-details {
-            flex-grow: 1;
-        }
-
-        #pedido-resumen .item-cantidad {
-            margin-left: 10px;
-            color: #777;
-        }
-
-        #pedido-resumen .item-precio {
-            font-weight: bold;
-            margin-left: auto;
-        }
-
-        #pedido-resumen .remove-btn {
-            background: none;
-            border: none;
-            color: #d32f2f;
-            cursor: pointer;
-            font-size: 14px;
-            margin-left: 10px;
-        }
-
-        #pedido-resumen .remove-btn:hover {
-            color: #b71c1c;
-        }
-
-        #pedido-resumen p strong {
-            font-size: 18px;
-        }
-
-        #whatsapp-btn {
-            display: block;
-            margin: 20px auto 0;
-            background-color: #25D366;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 18px;
-            border-radius: 6px;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        #whatsapp-btn:hover {
-            background-color: #1ebe5d;
-        }
-
-        .zoom-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 1000;
-        }
-
-        .zoom-overlay img {
-            max-width: 90%;
-            max-height: 80%;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            margin-bottom: 20px;
-        }
-
-        .zoom-overlay button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 6px;
-            background-color: #ffffff;
-            cursor: pointer;
-        }
-
-        .zoom-overlay button:hover {
-            background-color: #f1f1f1;
-        }
-
-        .info-section {
-            margin: 40px 20px;
-            text-align: center;
-        }
-
-        .info-section h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .info-section p {
-            margin-bottom: 15px;
-        }
-
-        .footer {
-            text-align: center;
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            margin-top: 40px;
-            font-size: 14px;
-        }
-
-        /* Estilo del mensaje temporal */
-        #mensaje-agregado {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 16px;
-            z-index: 9999;
-            display: none;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        }
-
-        /* Estilos de accesibilidad */
-        .frame img[alt=""] { /* Ocultar imágenes sin texto alternativo para lectores de pantalla */
-            visibility: hidden;
-        }
-
-        /* Mejoras responsivas adicionales */
-        @media (max-width: 768px) {
-            .menu-container {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-        }
-
-        @media (max-width: 600px) { /* Ajuste para pantallas de celular */
-            .menu-container {
-                grid-template-columns: repeat(2, 1fr); /* Mostrar 2 columnas en celulares */
-            }
-
-            .frame {
-                max-width: 100%; /* Los frames ocupan el ancho disponible de su celda */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .menu-container {
-                grid-template-columns: 1fr; /* Volver a una columna en pantallas muy pequeñas */
-            }
-        }
-    </style>
-    <style>
-        @keyframes slide-in-one-tap {
-            from {
-                transform: translateY(80px);
-            }
-            to {
-                transform: translateY(0px);
-            }
-        }
-
-        .trust-hide-gracefully {
-            opacity: 0;
-        }
-
-        .trust-wallet-one-tap .hidden {
-            display: none;
-        }
-
-        .trust-wallet-one-tap .semibold {
-            font-weight: 500;
-        }
-
-        .trust-wallet-one-tap .binance-plex {
-            font-family: 'Binance';
-        }
-
-        .trust-wallet-one-tap .rounded-full {
-            border-radius: 50%;
-        }
-
-        .trust-wallet-one-tap .flex {
-            display: flex;
-        }
-
-        .trust-wallet-one-tap .flex-col {
-            flex-direction: column;
-        }
-
-        .trust-wallet-one-tap .items-center {
-            align-items: center;
-        }
-
-        .trust-wallet-one-tap .space-between {
-            justify-content: space-between;
-        }
-
-        .trust-wallet-one-tap .justify-center {
-            justify-content: center;
-        }
-
-        .trust-wallet-one-tap .w-full {
-            width: 100%;
-        }
-
-        .trust-wallet-one-tap .box {
-            transition: all 0.5s cubic-bezier(0, 0, 0, 1.43);
-            animation: slide-in-one-tap 0.5s cubic-bezier(0, 0, 0, 1.43);
-            width: 384px;
-            border-radius: 15px;
-            background: #FFF;
-            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
-            position: fixed;
-            right: 30px;
-            bottom: 30px;
-            z-index: 1020;
-        }
-
-        .trust-wallet-one-tap .header {
-            gap: 15px;
-            border-bottom: 1px solid #E6E6E6;
-            padding: 10px 18px;
-        }
-
-        .trust-wallet-one-tap .header .left-items {
-            gap: 15px
-        }
-
-        .trust-wallet-one-tap .header .title {
-            color: #1E2329;
-            font-size: 18px;
-            font-weight: 600;
-            line-height: 28px;
-        }
-
-        .trust-wallet-one-tap .header .subtitle {
-            color: #474D57;
-            font-size: 14px;
-            line-height: 20px;
-        }
-
-        .trust-wallet-one-tap .header .close {
-            color: #1E2329;
-            cursor: pointer;
-        }
-
-        .trust-wallet-one-tap .body {
-            padding: 9px 18px;
-            gap: 10px;
-
-        }
-
-        .trust-wallet-one-tap .body .right-items {
-            gap: 10px;
-            width: 100%;
-        }
-
-        .trust-wallet-one-tap .body .right-items .wallet-title {
-            color: #1E2329;
-            font-size: 16px;
-            font-weight: 600;
-            line-height: 20px;
-        }
-
-        .trust-wallet-one-tap .body .right-items .wallet-subtitle {
-            color: #474D57;
-            font-size: 14px;
-            line-height: 20px;
-        }
-
-        .trust-wallet-one-tap .connect-indicator {
-            gap: 15px;
-            padding: 8px 0;
-        }
-
-        .trust-wallet-one-tap .connect-indicator .flow-icon {
-            color: #474D57;
-        }
-
-        .trust-wallet-one-tap .loading-color {
-            color: #FFF;
-        }
-
-        .trust-wallet-one-tap .button {
-            border-radius: 50px;
-            outline: 2px solid transparent;
-            outline-offset: 2px;
-            background-color: rgb(5, 0, 255);
-            border-color: rgb(229, 231, 235);
-            cursor: pointer;
-            text-align: center;
-            height: 45px;
-        }
-
-        .trust-wallet-one-tap .button .button-text {
-            color: #FFF;
-            font-size: 16px;
-            font-weight: 600;
-            line-height: 20px;
-        }
-
-        .trust-wallet-one-tap .footer {
-            margin: 20px 30px;
-        }
-
-        .trust-wallet-one-tap .check-icon {
-            color: #FFF;
-        }
-
-        @font-face {
-            font-family: 'Binance';
-            src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Regular.otf) format('opentype');
-            font-weight: 400;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'Binance';
-            src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Medium.otf) format('opentype');
-            font-weight: 500;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'Binance';
-            src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-SemiBold.otf) format('opentype');
-            font-weight: 600;
-            font-style: normal;
-        }
-
-    </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú - Healthy Delicias</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    h1, h2 {
+      color: #4CAF50;
+      text-align: center;
+      padding: 10px;
+      font-size: 24px;
+    }
+
+    .logo {
+      display: block;
+      margin: 0 auto;
+      width: 80%;
+      max-width: 280px;
+      height: auto;
+    }
+
+    .menu-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .frame {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 300px;
+      height: 600px;
+      text-align: center;
+      transition: transform 0.3s;
+      margin: auto;
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
+    }
+
+    .frame:hover {
+      transform: scale(1.05);
+    }
+
+    .frame img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      cursor: pointer;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .frame-content {
+      padding: 20px;
+    }
+
+    .frame h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      margin-top: 5px;
+    }
+
+    .frame p {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 15px;
+    }
+
+    .add-btn {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .add-btn:hover {
+      background-color: #45a049;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+    }
+
+    #pedido-resumen {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 500px;
+      margin: 20px auto;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    #pedido-resumen ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #pedido-resumen li {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    #whatsapp-btn {
+      display: block;
+      margin: 20px auto 0;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    #whatsapp-btn:hover {
+      background-color: #1ebe5d;
+    }
+
+    .zoom-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    .zoom-overlay img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      margin-bottom: 20px;
+    }
+
+    .zoom-overlay button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: #ffffff;
+      cursor: pointer;
+    }
+
+    .zoom-overlay button:hover {
+      background-color: #f1f1f1;
+    }
+
+    .info-section {
+      margin: 40px 20px;
+      text-align: center;
+    }
+
+    .footer {
+      text-align: center;
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    #mensaje-agregado {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      z-index: 9999;
+      display: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+  </style>
 </head>
 <body>
 
-    <img src="./Menú - Healthy Delicias_files/logo
+  <img src="./logo.png" alt="Logo de Healthy Delicias" class="logo">
+  <h1>Menú de Healthy Delicias</h1>
+
+  <div class="menu-container" id="menu">
+    <div class="frame">
+      <img src="./chocoflan.jpg" alt="Choco-Flan (Porción)" onclick="zoomImagen('chocoflan.jpg')">
+      <div class="frame-content">
+        <h3>Choco-Flan (Porción)</h3>
+        <p>Bizcocho de chocolate y flan cremoso en un solo postre irresistible.</p>
+        <p>RD$ 150.00</p>
+        <input type="number" id="cantidad-0" min="1" value="1">
+        <button class="add-btn" onclick="agregarPedido(0)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="frame">
+      <img src="./3leche.jpg" alt="Tres Leches con Frutas 9oz" onclick="zoomImagen('3leche.jpg')">
+      <div class="frame-content">
+        <h3>Tres Leches con Frutas 9oz</h3>
+        <p>Bizcocho húmedo bañado en tres leches y cubierto con frutas frescas.</p>
+        <p>RD$ 70.00</p>
+        <input type="number" id="cantidad-1" min="1" value="1">
+        <button class="add-btn" onclick="agregarPedido(1)">Agregar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="pedido-resumen">
+    <h2>Resumen de tu Pedido</h2>
+    <ul id="resumen-lista"></ul>
+    <button id="whatsapp-btn" onclick="enviarWhatsapp()">Enviar pedido por WhatsApp</button>
+  </div>
+
+  <script>
+    const productos = [
+      { id: 0, nombre: "Choco-Flan (Porción)", precio: 150.00 },
+      { id: 1, nombre: "Tres Leches con Frutas 9oz", precio: 70.00 },
+    ];
+
+    let pedido = [];
+
+    function agregarPedido(id) {
+      const cantidad = document.getElementById('cantidad-' + id).value;
+      const producto = productos.find(p => p.id === id);
+      const item = { ...producto, cantidad: cantidad };
+      pedido.push(item);
+
+      mostrarResumen();
+      mostrarMensajeAgregado();
+    }
+
+    function mostrarResumen() {
+      const lista = document.getElementById('resumen-lista');
+      lista.innerHTML = '';
+      pedido.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `${item.nombre} - RD$ ${item.precio} x ${item.cantidad} 
+          <button onclick="eliminarItem(${index})">Eliminar</button>`;
+        lista.appendChild(li);
+      });
+    }
+
+    function eliminarItem(index) {
+      pedido.splice(index, 1);
+      mostrarResumen();
+    }
+
+    function mostrarMensajeAgregado() {
+      const mensaje = document.getElementById('mensaje-agregado');
+      mensaje.style.display = 'block';
+      setTimeout(() => mensaje.style.display = 'none', 3000);
+    }
+
+    function enviarWhatsapp() {
+      let mensaje = "Pedido de Healthy Delicias:\n";
+      pedido.forEach(item => {
+        mensaje += `${item.nombre} - RD$ ${item.precio} x ${item.cantidad}\n`;
+      });
+      const url = `https://wa.me/1XXXXXXXXXX?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
+    }
+
+    function zoomImagen(imagen) {
+      const overlay = document.createElement('div');
+      overlay.className = 'zoom-overlay';
+      overlay.innerHTML = `
+        <img src="./${imagen}" alt="Imagen ampliada">
+        <button onclick="cerrarZoom()">Cerrar</button>
+      `;
+      document.body.appendChild(overlay);
+    }
+
+    function cerrarZoom() {
+      const overlay = document.querySelector('.zoom-overlay');
+      if (overlay) overlay.remove();
+    }
+  </script>
+
+  <div id="mensaje-agregado">Artículo agregado al pedido</div>
+
+  <div class="footer">
+    <p>© 2025 Healthy Delicias | Todos los derechos reservados</p>
+  </div>
+
+</body>
+</html>
