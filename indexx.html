@@ -337,9 +337,13 @@ function actualizarResumen() {
 
   // Creación del mensaje de WhatsApp
   const mensaje = carrito.map(item => `${item.nombre} - ${item.cantidad} x RD$ ${item.precio.toFixed(2)} = RD$ ${item.total.toFixed(2)}`).join('%0A');
-  whatsappBtn.href = `https://wa.me/18096780179?text=Quiero%20hacer%20un%20pedido%20de%20los%20siguientes%20productos:%0A${mensaje}`;
-}
+  
+  // Agregar el total al final del mensaje
+  const mensajeConTotal = `${mensaje}%0A%0ATotal%20a%20pagar%3A%20RD$%20${total.toFixed(2)}`;
 
+  // Enlace con el mensaje actualizado
+  whatsappBtn.href = `https://wa.me/18096780179?text=Quiero%20hacer%20un%20pedido%20de%20los%20siguientes%20productos:%0A${mensajeConTotal}`;
+}
     function zoomImagen(imagen) {
       const overlay = document.createElement('div');
       overlay.className = 'zoom-overlay';
