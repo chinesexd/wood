@@ -1,331 +1,321 @@
 <!DOCTYPE html>
 <html lang="es" data-kantu="1">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú - Healthy Delicias</title>
-    <meta name="description" content="Healthy Delicias: comida saludable, postres deliciosos y desayunos únicos en Sajoma.">
-    <style>
-      /* Aquí van los estilos, no los he modificado para mantenerlos intactos */
-      body {
-        font-family: 'Segoe UI', sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        color: #333;
-      }
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú - Healthy Delicias</title>
+  <meta name="description" content="Healthy Delicias: comida saludable, postres deliciosos y desayunos únicos en Sajoma.">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
 
-      h1, h2 {
-        color: #4CAF50;
-        text-align: center;
-        padding: 10px;
-        font-size: 24px;
-      }
+    h1, h2 {
+      color: #4CAF50;
+      text-align: center;
+      padding: 10px;
+      font-size: 24px;
+    }
 
-      .logo {
-        display: block;
-        margin: 0 auto;
-        width: 80%;
-        max-width: 280px;
-        height: auto;
-      }
+    .logo {
+      display: block;
+      margin: 0 auto;
+      width: 80%;
+      max-width: 280px;
+      height: auto;
+    }
 
-      .menu-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        padding: 20px;
-      }
+    .menu-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
 
-      .frame {
-        background-color: #fff;
-        border-radius: 12px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        width: 100%;
-        max-width: 300px;
-        height: 600px;
-        text-align: center;
-        transition: transform 0.3s;
-        margin: auto;
-        overflow: hidden;
-        border: 1px solid #e0e0e0;
-      }
+    .frame {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 300px;
+      height: 600px; /* MÁS ALTO */
+      text-align: center;
+      transition: transform 0.3s;
+      margin: auto;
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
+    }
 
-      .frame:hover {
-        transform: scale(1.05);
-      }
+    .frame:hover {
+      transform: scale(1.05);
+    }
 
-      .frame img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-        cursor: pointer;
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-        margin-bottom: 10px;
-      }
+    .frame img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      cursor: pointer;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      margin-bottom: 10px;
+    }
 
-      .frame-content {
-        padding: 20px;
-      }
+    .frame-content {
+      padding: 20px;
+    }
 
-      .frame h3 {
-        font-size: 16px;
-        margin-bottom: 10px;
-        margin-top: 5px;
-      }
+    .frame h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      margin-top: 5px;
+    }
 
-      .frame p {
-        font-size: 14px;
-        color: #777;
-        margin-bottom: 15px;
-      }
+    .frame p {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 15px;
+    }
 
-      .add-btn {
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 16px;
-        width: 100%;
-      }
+    .add-btn {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
 
-      .add-btn:hover {
-        background-color: #45a049;
-      }
+    .add-btn:hover {
+      background-color: #45a049;
+    }
 
-      input[type="number"] {
-        width: 60px;
-        padding: 5px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        margin-top: 5px;
-      }
+    input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+    }
 
-      #pedido-resumen {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 12px;
-        max-width: 500px;
-        margin: 20px auto;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      }
+    #pedido-resumen {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 500px;
+      margin: 20px auto;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
 
-      #pedido-resumen ul {
-        list-style: none;
-        padding: 0;
-      }
+    #pedido-resumen ul {
+      list-style: none;
+      padding: 0;
+    }
 
-      #pedido-resumen li {
-        padding: 5px 0;
-        border-bottom: 1px solid #eee;
-      }
+    #pedido-resumen li {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
 
-      #whatsapp-btn {
-        display: block;
-        margin: 20px auto 0;
-        background-color: #25D366;
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        font-size: 18px;
-        border-radius: 6px;
-        text-decoration: none;
-        text-align: center;
-      }
+    #whatsapp-btn {
+      display: block;
+      margin: 20px auto 0;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      text-align: center;
+    }
 
-      #whatsapp-btn:hover {
-        background-color: #1ebe5d;
-      }
+    #whatsapp-btn:hover {
+      background-color: #1ebe5d;
+    }
 
-      .zoom-overlay {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.8);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        z-index: 1000;
-      }
+    .zoom-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 1000;
+    }
 
-      .zoom-overlay img {
-        max-width: 90%;
-        max-height: 80%;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.5);
-        margin-bottom: 20px;
-      }
+    .zoom-overlay img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      margin-bottom: 20px;
+    }
 
-      .zoom-overlay button {
-        padding: 10px 20px;
-        font-size: 16px;
-        border: none;
-        border-radius: 6px;
-        background-color: #ffffff;
-        cursor: pointer;
-      }
+    .zoom-overlay button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: #ffffff;
+      cursor: pointer;
+    }
 
-      .zoom-overlay button:hover {
-        background-color: #f1f1f1;
-      }
+    .zoom-overlay button:hover {
+      background-color: #f1f1f1;
+    }
 
-      /* Estilo del mensaje temporal */
-      #mensaje-agregado {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 8px;
-        font-size: 16px;
-        z-index: 9999;
-        display: none;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      }
+    .info-section {
+      margin: 40px 20px;
+      text-align: center;
+    }
 
-      @media (max-width: 1024px) {
-        .menu-container {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
+    .footer {
+      text-align: center;
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      margin-top: 40px;
+    }
 
-      @media (max-width: 600px) {
-        .menu-container {
-          grid-template-columns: repeat(2, 1fr);
-        }
+    /* Estilo del mensaje temporal */
+    #mensaje-agregado {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      z-index: 9999;
+      display: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
 
-        .add-btn {
-          width: 100%;
-        }
+  <img src="./Menú - Healthy Delicias2_files/logo.png" alt="Logo de Healthy Delicias" class="logo">
+  <h1>Menú de Healthy Delicias</h1>
 
-        .frame img {
-          height: 180px;
-        }
+  <!-- Mensaje de agregado al carrito -->
+  <div id="mensaje-agregado">¡Se ha agregado a tu carrito al final de la página!</div>
 
-        .frame {
-          max-width: 280px;
-          height: 600px;
-        }
-      }
-
-      @media (max-width: 400px) {
-        .menu-container {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .frame {
-          max-width: 220px;
-          height: 480px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-
-    <img src="./Menú - Healthy Delicias2_files/logo.png" alt="Logo de Healthy Delicias" class="logo">
-    <h1>Menú de Healthy Delicias</h1>
-
-    <!-- Mensaje de agregado al carrito -->
-    <div id="mensaje-agregado">¡Se ha agregado a tu carrito al final de la página!</div>
-
-    <div class="menu-container" id="menu">
-      <!-- Aquí agregamos los artículos sin borrar los existentes -->
-      <div class="frame">
-        <img src="./Menú - Healthy Delicias2_files/chocoflan.jpg" alt="Choco-Flan (Porción)" onclick="zoomImagen('chocoflan.jpg')">
-        <div class="frame-content">
-          <h3>Choco-Flan (Porción)</h3>
-          <p>Bizcocho de chocolate y flan cremoso en un solo postre irresistible.</p>
-          <p>RD$ 150.00</p>
-          <input type="number" id="cantidad-0" min="1" value="1">
-          <button class="add-btn" onclick="agregarPedido(0)">Agregar</button>
-        </div>
+  <div class="menu-container" id="menu">
+    <div class="frame">
+      <img src="./Menú - Healthy Delicias2_files/chocoflan.jpg" alt="Choco-Flan (Porción)" onclick="zoomImagen('chocoflan.jpg')">
+      <div class="frame-content">
+        <h3>Choco-Flan (Porción)</h3>
+        <p>Bizcocho de chocolate y flan cremoso en un solo postre irresistible.</p>
+        <p>RD$ 150.00</p>
+        <input type="number" id="cantidad-0" min="1" value="1">
+        <button class="add-btn" onclick="agregarPedido(0)">Agregar</button>
       </div>
-
-      <div class="frame">
-        <img src="./Menú - Healthy Delicias2_files/3leche.jpg" alt="Tres Leches con Frutas 9oz" onclick="zoomImagen('3leche.jpg')">
-        <div class="frame-content">
-          <h3>Tres Leches con Frutas 9oz</h3>
-          <p>Bizcocho húmedo bañado en tres leches y cubierto con frutas frescas.</p>
-          <p>RD$ 70.00</p>
-          <input type="number" id="cantidad-1" min="1" value="1">
-          <button class="add-btn" onclick="agregarPedido(1)">Agregar</button>
-        </div>
+    </div>
+    <div class="frame">
+      <img src="./Menú - Healthy Delicias2_files/3leche.jpg" alt="Tres Leches con Frutas 9oz" onclick="zoomImagen('3leche.jpg')">
+      <div class="frame-content">
+        <h3>Tres Leches con Frutas 9oz</h3>
+        <p>Bizcocho húmedo bañado en tres leches y cubierto con frutas frescas.</p>
+        <p>RD$ 70.00</p>
+        <input type="number" id="cantidad-1" min="1" value="1">
+        <button class="add-btn" onclick="agregarPedido(1)">Agregar</button>
       </div>
-      <!-- Continúa con los demás artículos sin cambios -->
-
     </div>
-
-    <!-- Resumen de Pedido -->
-    <div id="pedido-resumen">
-      <h2>Resumen de Pedido</h2>
-      <ul id="lista-pedido"></ul>
-      <a href="https://wa.me/1234567890?text=Quiero%20realizar%20un%20pedido" id="whatsapp-btn" target="_blank">Confirmar Pedido por WhatsApp</a>
+    <div class="frame">
+      <img src="./Menú - Healthy Delicias2_files/panguineo.jpg" alt="Banana Bread con Chispas" onclick="zoomImagen('panguineo.jpg')">
+      <div class="frame-content">
+        <h3>Banana Bread con Chispas</h3>
+        <p>Delicioso pan de plátano con chispas de chocolate.</p>
+        <p>RD$ 120.00</p>
+        <input type="number" id="cantidad-2" min="1" value="1">
+        <button class="add-btn" onclick="agregarPedido(2)">Agregar</button>
+      </div>
     </div>
+  </div>
 
-    <!-- Funciones JavaScript -->
-    <script>
-      var menu = [
-        { nombre: "Choco-Flan (Porción)", precio: 150, imagen: "chocoflan.jpg" },
-        { nombre: "Tres Leches con Frutas 9oz", precio: 70, imagen: "3leche.jpg" },
-        // Continúa con todos los artículos de tu menú...
-      ];
+  <div id="pedido-resumen">
+    <h2>Resumen de Pedido</h2>
+    <ul id="resumen-lista">
+      <!-- Los artículos se agregarán aquí -->
+    </ul>
+    <a href="https://wa.me/1" id="whatsapp-btn" target="_blank">Realizar Pedido en WhatsApp</a>
+  </div>
 
-      var carrito = [];
+  <div id="zoom" class="zoom-overlay" style="display: none;">
+    <img id="zoom-img" src="" alt="Imagen ampliada">
+    <button onclick="cerrarZoom()">Cerrar</button>
+  </div>
 
-      function agregarPedido(id) {
-        var cantidad = document.getElementById('cantidad-' + id).value;
-        var articulo = menu[id];
-        articulo.cantidad = cantidad;
+  <footer class="footer">
+    <p>&copy; 2025 Healthy Delicias | Todos los derechos reservados.</p>
+  </footer>
 
-        // Agregar artículo al carrito
-        carrito.push(articulo);
+  <script>
+    let productos = [
+      { nombre: 'Choco-Flan (Porción)', precio: 150, imagen: './Menú - Healthy Delicias2_files/chocoflan.jpg' },
+      { nombre: 'Tres Leches con Frutas 9oz', precio: 70, imagen: './Menú - Healthy Delicias2_files/3leche.jpg' },
+      { nombre: 'Banana Bread con Chispas', precio: 120, imagen: './Menú - Healthy Delicias2_files/panguineo.jpg' }
+    ];
 
-        // Actualizar resumen de pedido
-        actualizarResumen();
-        
-        // Mostrar mensaje de agregado
-        mostrarMensaje();
-      }
+    let carrito = [];
 
-      function mostrarMensaje() {
-        var mensaje = document.getElementById('mensaje-agregado');
-        mensaje.style.display = 'block';
-        setTimeout(function() {
-          mensaje.style.display = 'none';
-        }, 2000);
-      }
+    function agregarPedido(index) {
+      const cantidad = document.getElementById(`cantidad-${index}`).value;
+      const producto = productos[index];
+      const productoEnCarrito = { ...producto, cantidad: cantidad };
 
-      function actualizarResumen() {
-        var lista = document.getElementById('lista-pedido');
-        lista.innerHTML = ''; // Limpiar lista
-        carrito.forEach(function(item) {
-          var li = document.createElement('li');
-          li.textContent = item.nombre + " x" + item.cantidad + " - RD$ " + (item.precio * item.cantidad);
-          lista.appendChild(li);
-        });
-      }
+      carrito.push(productoEnCarrito);
+      actualizarResumen();
+      mostrarMensaje();
+    }
 
-      function zoomImagen(imagen) {
-        var overlay = document.createElement('div');
-        overlay.classList.add('zoom-overlay');
-        var img = document.createElement('img');
-        img.src = './Menú - Healthy Delicias2_files/' + imagen;
-        var btnCerrar = document.createElement('button');
-        btnCerrar.textContent = 'Cerrar';
-        btnCerrar.onclick = function() {
-          overlay.remove();
-        };
+    function actualizarResumen() {
+      const lista = document.getElementById('resumen-lista');
+      lista.innerHTML = '';
 
-        overlay.appendChild(img);
-        overlay.appendChild(btnCerrar);
-        document.body.appendChild(overlay);
-      }
-    </script>
-  </body>
+      carrito.forEach((producto, index) => {
+        const item = document.createElement('li');
+        item.innerHTML = `
+          ${producto.nombre} x${producto.cantidad} - RD$ ${producto.precio * producto.cantidad}
+          <button onclick="eliminarProducto(${index})">Eliminar</button>
+        `;
+        lista.appendChild(item);
+      });
+    }
+
+    function eliminarProducto(index) {
+      carrito.splice(index, 1);
+      actualizarResumen();
+    }
+
+    function zoomImagen(imagen) {
+      const zoom = document.getElementById('zoom');
+      const zoomImg = document.getElementById('zoom-img');
+      zoomImg.src = `./Menú - Healthy Delicias2_files/${imagen}`;
+      zoom.style.display = 'flex';
+    }
+
+    function cerrarZoom() {
+      document.getElementById('zoom').style.display = 'none';
+    }
+
+    function mostrarMensaje() {
+      const mensaje = document.getElementById('mensaje-agregado');
+      mensaje.style.display = 'block';
+      setTimeout(() => {
+        mensaje.style.display = 'none';
+      }, 2000);
+    }
+  </script>
+</body>
 </html>
