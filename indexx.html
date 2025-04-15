@@ -321,19 +321,24 @@
       actualizarResumen();
     }
 
-    function actualizarResumen() {
-      listaPedido.innerHTML = '';
-      let total = 0;
-      carrito.forEach((item, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `${item.nombre} - ${item.cantidad} x RD$ ${item.precio.toFixed(2)} = RD$ ${item.total.toFixed(2)} 
-          <button onclick="eliminarDelCarrito(${index})">Eliminar</button>`;
-        listaPedido.appendChild(li);
-        total += item.total;
-      });
-      totalSpan.textContent = total.toFixed(2);
-      whatsappBtn.href = `https://wa.me/18096780179?text=Quiero%20hacer%20un%20pedido%20de%20los%20siguientes%20productos:%20${encodeURIComponent(carrito.map(item => `${item.nombre} - ${item.cantidad} x RD$ ${item.precio.toFixed(2)}`).join('%0A'))}`;
-    }
+function actualizarResumen() {
+  listaPedido.innerHTML = '';
+  let total = 0;
+
+  carrito.forEach((item, index) => {
+    const li = document.createElement('li');
+    li.innerHTML = `${item.nombre} - ${item.cantidad} x RD$ ${item.precio.toFixed(2)} = RD$ ${item.total.toFixed(2)} 
+      <button onclick="eliminarDelCarrito(${index})">Eliminar</button>`;
+    listaPedido.appendChild(li);
+    total += item.total;
+  });
+
+  totalSpan.textContent = total.toFixed(2);
+
+  // Creación del mensaje de WhatsApp
+  const mensaje = carrito.map(item => `${item.nombre} - ${item.cantidad} x RD$ ${item.precio.toFixed(2)} = RD$ ${item.total.toFixed(2)}`).join('%0A');
+  whatsappBtn.href = `https://wa.me/18096780179?text=Quiero%20hacer%20un%20pedido%20de%20los%20siguientes%20productos:%0A${mensaje}`;
+}
 
     function zoomImagen(imagen) {
       const overlay = document.createElement('div');
