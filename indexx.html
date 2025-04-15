@@ -6,199 +6,116 @@
   <title>Menú - Healthy Delicias</title>
   <meta name="description" content="Healthy Delicias: comida saludable, postres deliciosos y desayunos únicos en Sajoma.">
   <style>
+    /* Estilos generales */
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-
-    h1, h2 {
-      color: #4CAF50;
+      font-family: Arial, sans-serif;
       text-align: center;
-      padding: 10px;
-      font-size: 24px;
-    }
-
-    .logo {
-      display: block;
-      margin: 0 auto;
-      width: 80%;
-      max-width: 280px;
-      height: auto;
-    }
-
-    .menu-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      background-color: #f4f4f4;
       padding: 20px;
     }
 
-    .frame {
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 300px;
-      height: 600px; /* MÁS ALTO */
-      text-align: center;
-      transition: transform 0.3s;
-      margin: auto;
-      overflow: hidden;
-      border: 1px solid #e0e0e0;
+    h1 {
+      color: #4CAF50;
+      margin-bottom: 20px;
     }
 
-    .frame:hover {
-      transform: scale(1.05);
+    .logo {
+      width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .menu-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .frame {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+      width: 200px;
+      text-align: center;
+      padding: 10px;
     }
 
     .frame img {
       width: 100%;
-      height: 220px;
-      object-fit: cover;
-      cursor: pointer;
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-      margin-bottom: 10px;
+      border-radius: 10px;
     }
 
     .frame-content {
-      padding: 20px;
-    }
-
-    .frame h3 {
-      font-size: 16px;
-      margin-bottom: 10px;
-      margin-top: 5px;
-    }
-
-    .frame p {
-      font-size: 14px;
-      color: #777;
-      margin-bottom: 15px;
+      margin-top: 10px;
     }
 
     .add-btn {
       background-color: #4CAF50;
-      border: none;
       color: white;
-      padding: 10px 20px;
-      border-radius: 6px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
       cursor: pointer;
-      font-size: 16px;
-      width: 100%;
+      margin-top: 10px;
     }
 
     .add-btn:hover {
       background-color: #45a049;
     }
 
-    input[type="number"] {
-      width: 60px;
-      padding: 5px;
+    #mensaje-agregado {
+      display: none;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      margin-top: 20px;
       border-radius: 5px;
-      border: 1px solid #ccc;
-      margin-top: 5px;
     }
 
     #pedido-resumen {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 500px;
-      margin: 20px auto;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    #pedido-resumen ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    #pedido-resumen li {
-      padding: 5px 0;
-      border-bottom: 1px solid #eee;
+      margin-top: 30px;
     }
 
     #whatsapp-btn {
-      display: block;
-      margin: 20px auto 0;
       background-color: #25D366;
       color: white;
-      border: none;
-      padding: 12px 20px;
-      font-size: 18px;
-      border-radius: 6px;
+      padding: 15px 30px;
       text-decoration: none;
-      text-align: center;
+      border-radius: 5px;
+      font-size: 18px;
+      margin-top: 20px;
+      display: inline-block;
     }
 
     #whatsapp-btn:hover {
-      background-color: #1ebe5d;
+      background-color: #128C7E;
     }
 
-    .zoom-overlay {
+    /* Zoom de imagen */
+    #zoom {
+      display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      display: flex;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      z-index: 1000;
     }
 
-    .zoom-overlay img {
+    #zoom-img {
       max-width: 90%;
-      max-height: 80%;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-      margin-bottom: 20px;
+      max-height: 90%;
     }
 
-    .zoom-overlay button {
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      background-color: #ffffff;
-      cursor: pointer;
-    }
-
-    .zoom-overlay button:hover {
-      background-color: #f1f1f1;
-    }
-
-    .info-section {
-      margin: 40px 20px;
-      text-align: center;
-    }
-
+    /* Pie de página */
     .footer {
       text-align: center;
-      background-color: #4CAF50;
+      margin-top: 50px;
+      padding: 10px;
+      background-color: #333;
       color: white;
-      padding: 20px;
-      margin-top: 40px;
-    }
-
-    /* Estilo del mensaje temporal */
-    #mensaje-agregado {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 16px;
-      z-index: 9999;
-      display: none;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
   </style>
 </head>
@@ -248,7 +165,7 @@
     <ul id="resumen-lista">
       <!-- Los artículos se agregarán aquí -->
     </ul>
-    <a href="https://wa.me/18096780179" id="whatsapp-btn" target="_blank">Realizar Pedido en WhatsApp</a>
+    <a href="#" id="whatsapp-btn" target="_blank">Realizar Pedido en WhatsApp</a>
   </div>
 
   <div id="zoom" class="zoom-overlay" style="display: none;">
@@ -277,6 +194,7 @@
       carrito.push(productoEnCarrito);
       actualizarResumen();
       mostrarMensaje();
+      actualizarLinkWhatsapp();
     }
 
     function actualizarResumen() {
@@ -296,6 +214,7 @@
     function eliminarProducto(index) {
       carrito.splice(index, 1);
       actualizarResumen();
+      actualizarLinkWhatsapp();
     }
 
     function zoomImagen(imagen) {
@@ -316,6 +235,24 @@
         mensaje.style.display = 'none';
       }, 2000);
     }
+
+    function actualizarLinkWhatsapp() {
+      const enlace = document.getElementById('whatsapp-btn');
+      let mensaje = "Pedido de Healthy Delicias:\n\n";
+
+      carrito.forEach(producto => {
+        mensaje += `${producto.nombre} x${producto.cantidad} - RD$ ${producto.precio * producto.cantidad}\n`;
+      });
+
+      mensaje += `\nTotal: RD$ ${calcularTotal()}`;
+      mensaje = encodeURIComponent(mensaje);
+      enlace.href = `https://wa.me/1?text=${mensaje}`;
+    }
+
+    function calcularTotal() {
+      return carrito.reduce((total, producto) => total + (producto.precio * producto.cantidad), 0);
+    }
   </script>
+
 </body>
 </html>
