@@ -137,11 +137,34 @@
       background-color: #128C7E;
     }
 
+    /* Estilo del mensaje */
     #mensaje {
-      margin-top: 20px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 128, 0, 0.8);
+      color: white;
+      padding: 15px 30px;
       font-size: 18px;
-      color: green;
-      text-align: center;
+      font-weight: bold;
+      border-radius: 10px;
+      display: none;
+      z-index: 9999;
+      animation: mostrarMensaje 1s ease-out;
+    }
+
+    /* Animación para el mensaje */
+    @keyframes mostrarMensaje {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -219,9 +242,10 @@
     function mostrarMensaje(mensaje) {
       const mensajeDiv = document.getElementById("mensaje");
       mensajeDiv.textContent = mensaje;
+      mensajeDiv.style.display = "block";
       setTimeout(() => {
-        mensajeDiv.textContent = "";
-      }, 3000);
+        mensajeDiv.style.display = "none";
+      }, 3000); // El mensaje se oculta después de 3 segundos
     }
 
     function filtrarPorCategoria(categoria) {
@@ -255,3 +279,4 @@
   </script>
 </body>
 </html>
+
