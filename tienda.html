@@ -1,162 +1,322 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pantalla para Anuncios</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HEALTHY DELICIAS</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      color: #333;
+      margin: 20px;
+      background: #f9f9f9;
     }
 
-    header {
-      background-color: #222;
-      color: white;
-      padding: 10px;
+    h1 {
       text-align: center;
     }
 
-    .clock-weather {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      background-color: #444;
+    #logo {
+      display: block;
+      margin: 0 auto;
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    .categoria-btns {
+      text-align: center;
+      margin-top: 20px;
+    }
+#lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+#cerrar-lightbox {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+  z-index: 2100;
+}
+    .categoria-btn {
+      background-color: #4CAF50;
       color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
     }
 
-    .clock {
-      font-size: 2em;
+    .categoria-btn:hover {
+      background-color: #45a049;
     }
 
-    .weather {
-      text-align: right;
-    }
-
-    .content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 10px;
-      padding: 10px;
+    .productos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
     }
 
     .producto {
-      background-color: white;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
       padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 200px;
       text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .producto:hover {
+      transform: scale(1.02);
     }
 
     .producto img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .producto h3 {
-      margin: 10px 0 5px;
-    }
-
-    .producto p {
-      font-size: 1.2em;
-      color: #555;
-    }
-
-    /* Lightbox añadido */
-    #lightbox {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      left: 0;
-      top: 0;
       width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.9);
-      justify-content: center;
-      align-items: center;
+      height: 180px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
     }
 
-    #lightbox img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 10px;
+    .producto img:hover {
+      transform: scale(1.1);
     }
 
-    #lightbox .cerrar {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 40px;
+    button {
+      margin-top: 10px;
+      padding: 6px 12px;
+      background-color: green;
       color: white;
+      border: none;
+      border-radius: 5px;
       cursor: pointer;
-      z-index: 10000;
+    }
+
+    .cantidad {
+      margin-top: 10px;
+      padding: 5px;
+      font-size: 14px;
+      width: 50px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    #carrito {
+      margin-top: 30px;
+    }
+
+    #carrito ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #carrito li {
+      margin: 5px 0;
+    }
+
+    #whatsapp-btn {
+      display: block;
+      margin: 30px auto;
+      background-color: #25D366;
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 300px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #whatsapp-btn:hover {
+      background-color: #128C7E;
+    }
+
+    #mensaje {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      font-size: 16px;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      z-index: 1000;
+    }
+
+    #mensaje.mostrar {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Anuncios del Día</h1>
-  </header>
-  <div class="clock-weather">
-    <div class="clock" id="clock">00:00:00</div>
-    <div class="weather">
-      <div id="weather">Cargando clima...</div>
-    </div>
-  </div>
-  <main class="content" id="gallery">
-    <!-- Aquí se mostrarán las imágenes y videos -->
-    <div class="producto">
-      <img src="https://via.placeholder.com/400x300.png?text=Producto+1" alt="Producto 1">
-      <h3>Producto 1</h3>
-      <p>$10.00</p>
-    </div>
-    <div class="producto">
-      <img src="https://via.placeholder.com/400x300.png?text=Producto+2" alt="Producto 2">
-      <h3>Producto 2</h3>
-      <p>$15.00</p>
-    </div>
-  </main>
+<img id="logo" src="logo1.png" alt="Logo de tu negocio">
+  <h1>HEALTHY DELICIAS</h1>
 
-  <!-- Lightbox (añadido) -->
-  <div id="lightbox">
-    <span class="cerrar" onclick="cerrarLightbox()">&times;</span>
-    <img id="lightbox-img" src="" alt="Imagen ampliada">
+  <div class="categoria-btns">
+    <button class="categoria-btn" onclick="filtrarPorCategoria('todos')">Todos</button>
+    <button class="categoria-btn" onclick="filtrarPorCategoria('postres')">Postres</button>
+    <button class="categoria-btn" onclick="filtrarPorCategoria('desayunos')">Desayunos</button>
+    <button class="categoria-btn" onclick="filtrarPorCategoria('bebidas')">Bebidas</button>
   </div>
+
+  <div class="productos" id="lista-productos">
+    <div class="producto" data-categoria="postres">
+       <img src="bizcrema.jpg" alt="Pastel" width="200" height="180">
+      <h3>Pastel</h3>
+      <p>$15</p>
+      <input class="cantidad" type="number" value="1" min="1" id="cantidad-pastel">
+      <button onclick="agregarAlCarrito('Pastel', 15, document.getElementById('cantidad-pastel').value)">Agregar</button>
+    </div>
+
+    <div class="producto" data-categoria="desayunos">
+   <img src="bizcrema.jpg" alt="pastel" width="200" height="180">
+      <h3>Sandwich</h3>
+      <p>$25</p>
+      <input class="cantidad" type="number" value="1" min="1" id="cantidad-sandwich">
+      <button onclick="agregarAlCarrito('Sandwich', 25, document.getElementById('cantidad-sandwich').value)">Agregar</button>
+    </div>
+
+    <div class="producto" data-categoria="bebidas">
+     <img src="bizcrema.jpg" alt="Pastel" width="200" height="180">
+      <h3>Jugo</h3>
+      <p>$10</p>
+      <input class="cantidad" type="number" value="1" min="1" id="cantidad-jugo">
+      <button onclick="agregarAlCarrito('Jugo', 10, document.getElementById('cantidad-jugo').value)">Agregar</button>
+    </div>
+  </div>
+
+  <div id="carrito">
+    <h2>Carrito de compras</h2>
+    <ul id="lista-carrito"></ul>
+    <p>Total: $<span id="total">0</span></p>
+    <button id="whatsapp-btn" onclick="enviarPorWhatsApp()">Enviar pedido por WhatsApp</button>
+  </div>
+
+  <div id="mensaje">Agregado al carrito</div>
 
   <script>
-    function updateClock() {
-      const now = new Date();
-      const timeString = now.toLocaleTimeString();
-      document.getElementById("clock").textContent = timeString;
+    let carrito = {};
+    let total = 0;
+
+    function agregarAlCarrito(producto, precio, cantidad) {
+      cantidad = parseInt(cantidad);
+      if (carrito[producto]) {
+        carrito[producto].cantidad += cantidad;
+      } else {
+        carrito[producto] = { precio, cantidad };
+      }
+      total += precio * cantidad;
+      actualizarCarrito();
+      mostrarMensaje("Agregado al carrito");
     }
 
-    setInterval(updateClock, 1000);
-    updateClock(); // inicial
+    function actualizarCarrito() {
+      const lista = document.getElementById("lista-carrito");
+      lista.innerHTML = "";
+      for (let producto in carrito) {
+        const item = carrito[producto];
+        const li = document.createElement("li");
+        li.innerHTML = ${producto} x${item.cantidad} - $${item.precio * item.cantidad} <button onclick="eliminarDelCarrito('${producto}')">Eliminar</button>;
+        lista.appendChild(li);
+      }
+      document.getElementById("total").textContent = total;
+    }
 
-    // Simulación de clima
-    document.getElementById("weather").innerHTML = "25°C 🌤️<br>Ciudad";
+    function eliminarDelCarrito(producto) {
+      if (carrito[producto]) {
+        total -= carrito[producto].precio * carrito[producto].cantidad;
+        delete carrito[producto];
+        actualizarCarrito();
+      }
+    }
 
-    // Función para abrir imagen en lightbox
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
+    function mostrarMensaje(mensaje) {
+      const mensajeDiv = document.getElementById("mensaje");
+      mensajeDiv.textContent = mensaje;
+      mensajeDiv.classList.add("mostrar");
+      setTimeout(() => {
+        mensajeDiv.classList.remove("mostrar");
+      }, 2000);
+    }
 
-    document.querySelectorAll(".producto img").forEach(img => {
-      img.addEventListener("click", () => {
-        lightboxImg.src = img.src;
-        lightbox.style.display = "flex";
+    function filtrarPorCategoria(categoria) {
+      const productos = document.querySelectorAll(".producto");
+      productos.forEach(producto => {
+        if (categoria === "todos" || producto.dataset.categoria === categoria) {
+          producto.style.display = "block";
+        } else {
+          producto.style.display = "none";
+        }
       });
-    });
-
-    function cerrarLightbox() {
-      lightbox.style.display = "none";
-      lightboxImg.src = "";
     }
+
+    function enviarPorWhatsApp() {
+      if (Object.keys(carrito).length === 0) {
+        alert("El carrito está vacío.");
+        return;
+      }
+
+      let mensaje = "Hola, quiero hacer un pedido:\n";
+      for (let producto in carrito) {
+        const item = carrito[producto];
+        mensaje += • ${producto} x${item.cantidad} - $${item.precio * item.cantidad}\n;
+      }
+      mensaje += Total: $${total};
+      const telefono = "18097630202"; // Tu número
+      const url = https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)};
+      window.open(url, "_blank");
+    }
+
+    // Mostrar imagen ampliada
+document.querySelectorAll(".producto img").forEach(img => {
+  img.addEventListener("click", () => {
+    document.getElementById("imagen-ampliada").src = img.src;
+    document.getElementById("lightbox").style.display = "flex";
+  });
+});
+
+function cerrarLightbox() {
+  document.getElementById("lightbox").style.display = "none";
+}
   </script>
+
+  <!-- Lightbox para mostrar imagen ampliada -->
+<div id="lightbox" onclick="cerrarLightbox()">
+  <span id="cerrar-lightbox" onclick="cerrarLightbox()">×</span>
+  <img id="imagen-ampliada" src="" alt="Vista ampliada">
+</div>
 </body>
 </html>
