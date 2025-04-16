@@ -28,35 +28,7 @@
       text-align: center;
       margin-top: 20px;
     }
-#lightbox {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-}
 
-#lightbox img {
-  max-width: 90%;
-  max-height: 80%;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-}
-
-#cerrar-lightbox {
-  position: absolute;
-  top: 20px;
-  right: 40px;
-  font-size: 40px;
-  color: white;
-  cursor: pointer;
-  z-index: 2100;
-}
     .categoria-btn {
       background-color: #4CAF50;
       color: white;
@@ -299,24 +271,6 @@
       const url = https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)};
       window.open(url, "_blank");
     }
-
-    // Mostrar imagen ampliada
-document.querySelectorAll(".producto img").forEach(img => {
-  img.addEventListener("click", () => {
-    document.getElementById("imagen-ampliada").src = img.src;
-    document.getElementById("lightbox").style.display = "flex";
-  });
-});
-
-function cerrarLightbox() {
-  document.getElementById("lightbox").style.display = "none";
-}
   </script>
-
-  <!-- Lightbox para mostrar imagen ampliada -->
-<div id="lightbox" onclick="cerrarLightbox()">
-  <span id="cerrar-lightbox" onclick="cerrarLightbox()">×</span>
-  <img id="imagen-ampliada" src="" alt="Vista ampliada">
-</div>
 </body>
 </html>
