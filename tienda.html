@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Menú</title>
+  <title>HEALTHY DELICIAS</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -18,15 +18,10 @@
     #logo {
       display: block;
       margin: 0 auto;
-      width: 100px;
-      height: 100px;
-      background-color: #ddd;
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
       border-radius: 50%;
-      text-align: center;
-      line-height: 100px;
-      font-weight: bold;
-      color: white;
-      font-size: 20px;
     }
 
     .categoria-btns {
@@ -66,12 +61,32 @@
       width: 200px;
       text-align: center;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .producto:hover {
+      transform: scale(1.02);
     }
 
     .producto img {
       width: 100%;
       height: 180px;
       object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .producto img:hover {
+      transform: scale(1.1);
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 6px 12px;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
 
     .cantidad {
@@ -110,70 +125,68 @@
       width: 100%;
       max-width: 300px;
       cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #whatsapp-btn:hover {
+      background-color: #128C7E;
     }
 
     #mensaje {
       position: fixed;
-      top: 50%;
+      top: 20px;
       left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #28a745;
+      transform: translateX(-50%);
+      background-color: #4CAF50;
       color: white;
-      padding: 15px 30px;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 10px;
-      display: none;
-      opacity: 1;
-      z-index: 9999;
-      transition: opacity 1.5s ease-out;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      font-size: 16px;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      z-index: 1000;
     }
 
-    .btn-eliminar {
-      background: red;
-      color: white;
-      margin-left: 10px;
-      border: none;
-      padding: 4px 8px;
-      cursor: pointer;
-      border-radius: 5px;
+    #mensaje.mostrar {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
-  <div id="logo">Logo</div>
-  <h1>Menú</h1>
+  <img id="logo" src="logo2.png" alt="logo2.png"> <!-- Aquí va tu imagen -->
+  <h1>HEALTHY DELICIAS</h1>
 
   <div class="categoria-btns">
     <button class="categoria-btn" onclick="filtrarPorCategoria('todos')">Todos</button>
-    <button class="categoria-btn" onclick="filtrarPorCategoria('Postres')">Postres</button>
-    <button class="categoria-btn" onclick="filtrarPorCategoria('Desayunos')">Desayunos</button>
-    <button class="categoria-btn" onclick="filtrarPorCategoria('Bebidas')">Bebidas</button>
+    <button class="categoria-btn" onclick="filtrarPorCategoria('postres')">Postres</button>
+    <button class="categoria-btn" onclick="filtrarPorCategoria('desayunos')">Desayunos</button>
+    <button class="categoria-btn" onclick="filtrarPorCategoria('bebidas')">Bebidas</button>
   </div>
 
   <div class="productos" id="lista-productos">
-    <div class="producto" data-categoria="Postres">
-      <img src="https://via.placeholder.com/200x180?text=Pastelito" alt="Pastelito">
-      <h3>Pastelito</h3>
+    <div class="producto" data-categoria="postres">
+        <img src="bizcrema.jpg/200x180?text=Pastel" alt="Pastel">
+      <h3>Pastel</h3>
       <p>$15</p>
-      <input class="cantidad" type="number" value="1" min="1" id="cantidad-pastelito">
-      <button onclick="agregarAlCarrito('Pastelito', 15, parseInt(document.getElementById('cantidad-pastelito').value))">Agregar</button>
+      <input class="cantidad" type="number" value="1" min="1" id="cantidad-pastel">
+      <button onclick="agregarAlCarrito('Pastel', 15, document.getElementById('cantidad-pastel').value)">Agregar</button>
     </div>
 
-    <div class="producto" data-categoria="Desayunos">
-      <img src="https://via.placeholder.com/200x180?text=Huevos+con+tocino" alt="Huevos con tocino">
-      <h3>Huevos con tocino</h3>
+    <div class="producto" data-categoria="desayunos">
+      <img src="bizcrema.jpg/200x180?text=Sandwich" alt="Sandwich">
+      <h3>Sandwich</h3>
       <p>$25</p>
-      <input class="cantidad" type="number" value="1" min="1" id="cantidad-huevos">
-      <button onclick="agregarAlCarrito('Huevos con tocino', 25, parseInt(document.getElementById('cantidad-huevos').value))">Agregar</button>
+      <input class="cantidad" type="number" value="1" min="1" id="cantidad-sandwich">
+      <button onclick="agregarAlCarrito('Sandwich', 25, document.getElementById('cantidad-sandwich').value)">Agregar</button>
     </div>
 
-    <div class="producto" data-categoria="Bebidas">
-      <img src="https://via.placeholder.com/200x180?text=Jugo+Natural" alt="Jugo Natural">
-      <h3>Jugo Natural</h3>
+    <div class="producto" data-categoria="bebidas">
+      <img src="bizcrema.jpg/200x180?text=Jugo" alt="Jugo">
+      <h3>Jugo</h3>
       <p>$10</p>
       <input class="cantidad" type="number" value="1" min="1" id="cantidad-jugo">
-      <button onclick="agregarAlCarrito('Jugo Natural', 10, parseInt(document.getElementById('cantidad-jugo').value))">Agregar</button>
+      <button onclick="agregarAlCarrito('Jugo', 10, document.getElementById('cantidad-jugo').value)">Agregar</button>
     </div>
   </div>
 
@@ -188,56 +201,51 @@
 
   <script>
     let carrito = {};
+    let total = 0;
 
-    function agregarAlCarrito(nombre, precio, cantidad) {
-      if (carrito[nombre]) {
-        carrito[nombre].cantidad += cantidad;
+    function agregarAlCarrito(producto, precio, cantidad) {
+      cantidad = parseInt(cantidad);
+      if (carrito[producto]) {
+        carrito[producto].cantidad += cantidad;
       } else {
-        carrito[nombre] = { precio, cantidad };
+        carrito[producto] = { precio, cantidad };
       }
-      mostrarMensaje("Agregado al carrito");
+      total += precio * cantidad;
       actualizarCarrito();
+      mostrarMensaje("Agregado al carrito");
     }
 
     function actualizarCarrito() {
       const lista = document.getElementById("lista-carrito");
       lista.innerHTML = "";
-      let total = 0;
       for (let producto in carrito) {
         const item = carrito[producto];
-        total += item.precio * item.cantidad;
-
         const li = document.createElement("li");
-        li.innerHTML = `${producto} x${item.cantidad} - $${item.precio * item.cantidad}
-                        <button class="btn-eliminar" onclick="eliminarDelCarrito('${producto}')">Eliminar</button>`;
+        li.innerHTML = `${producto} x${item.cantidad} - $${item.precio * item.cantidad} <button onclick="eliminarDelCarrito('${producto}')">Eliminar</button>`;
         lista.appendChild(li);
       }
       document.getElementById("total").textContent = total;
     }
 
     function eliminarDelCarrito(producto) {
-      delete carrito[producto];
-      actualizarCarrito();
+      if (carrito[producto]) {
+        total -= carrito[producto].precio * carrito[producto].cantidad;
+        delete carrito[producto];
+        actualizarCarrito();
+      }
     }
 
-    function mostrarMensaje(texto) {
-      const mensaje = document.getElementById("mensaje");
-      mensaje.textContent = texto;
-      mensaje.style.display = "block";
-      mensaje.style.opacity = "1";
-
+    function mostrarMensaje(mensaje) {
+      const mensajeDiv = document.getElementById("mensaje");
+      mensajeDiv.textContent = mensaje;
+      mensajeDiv.classList.add("mostrar");
       setTimeout(() => {
-        mensaje.style.opacity = "0";
-      }, 1500);
-
-      setTimeout(() => {
-        mensaje.style.display = "none";
-      }, 2500);
+        mensajeDiv.classList.remove("mostrar");
+      }, 2000);
     }
 
     function filtrarPorCategoria(categoria) {
       const productos = document.querySelectorAll(".producto");
-
       productos.forEach(producto => {
         if (categoria === "todos" || producto.dataset.categoria === categoria) {
           producto.style.display = "block";
@@ -248,17 +256,18 @@
     }
 
     function enviarPorWhatsApp() {
-      let mensaje = "Hola, quiero hacer un pedido:\n";
-      let total = 0;
+      if (Object.keys(carrito).length === 0) {
+        alert("El carrito está vacío.");
+        return;
+      }
 
+      let mensaje = "Hola, quiero hacer un pedido:\n";
       for (let producto in carrito) {
         const item = carrito[producto];
         mensaje += `• ${producto} x${item.cantidad} - $${item.precio * item.cantidad}\n`;
-        total += item.precio * item.cantidad;
       }
-
       mensaje += `Total: $${total}`;
-      const telefono = "18097630202";
+      const telefono = "18097630202"; // Tu número
       const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
     }
