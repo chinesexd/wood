@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HEALTHY DELICIAS</title>
+  <title>Mi Tienda</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -18,8 +18,8 @@
     #logo {
       display: block;
       margin: 0 auto;
-      width: 200px;
-      height: 200px;
+      width: 120px;
+      height: 120px;
       object-fit: contain;
       border-radius: 50%;
     }
@@ -154,8 +154,8 @@
   </style>
 </head>
 <body>
-<img id="logo" src="logo1.png" alt="Logo de tu negocio">
-  <h1>HEALTHY DELICIAS</h1>
+  <img id="logo" src="img/logo.png" alt="Logo de tu negocio"> <!-- Aquí va tu imagen -->
+  <h1>Mi Tienda</h1>
 
   <div class="categoria-btns">
     <button class="categoria-btn" onclick="filtrarPorCategoria('todos')">Todos</button>
@@ -166,7 +166,7 @@
 
   <div class="productos" id="lista-productos">
     <div class="producto" data-categoria="postres">
-       <img src="bizcrema.jpg" alt="Pastel" width="200" height="180">
+      <img src="https://via.placeholder.com/200x180?text=Pastel" alt="Pastel">
       <h3>Pastel</h3>
       <p>$15</p>
       <input class="cantidad" type="number" value="1" min="1" id="cantidad-pastel">
@@ -174,7 +174,7 @@
     </div>
 
     <div class="producto" data-categoria="desayunos">
-   <img src="bizcrema.jpg" alt="pastel" width="200" height="180">
+      <img src="https://via.placeholder.com/200x180?text=Sandwich" alt="Sandwich">
       <h3>Sandwich</h3>
       <p>$25</p>
       <input class="cantidad" type="number" value="1" min="1" id="cantidad-sandwich">
@@ -182,7 +182,7 @@
     </div>
 
     <div class="producto" data-categoria="bebidas">
-     <img src="bizcrema.jpg" alt="Pastel" width="200" height="180">
+      <img src="https://via.placeholder.com/200x180?text=Jugo" alt="Jugo">
       <h3>Jugo</h3>
       <p>$10</p>
       <input class="cantidad" type="number" value="1" min="1" id="cantidad-jugo">
@@ -221,7 +221,7 @@
       for (let producto in carrito) {
         const item = carrito[producto];
         const li = document.createElement("li");
-        li.innerHTML = ${producto} x${item.cantidad} - $${item.precio * item.cantidad} <button onclick="eliminarDelCarrito('${producto}')">Eliminar</button>;
+        li.innerHTML = `${producto} x${item.cantidad} - $${item.precio * item.cantidad} <button onclick="eliminarDelCarrito('${producto}')">Eliminar</button>`;
         lista.appendChild(li);
       }
       document.getElementById("total").textContent = total;
@@ -264,11 +264,11 @@
       let mensaje = "Hola, quiero hacer un pedido:\n";
       for (let producto in carrito) {
         const item = carrito[producto];
-        mensaje += • ${producto} x${item.cantidad} - $${item.precio * item.cantidad}\n;
+        mensaje += `• ${producto} x${item.cantidad} - $${item.precio * item.cantidad}\n`;
       }
-      mensaje += Total: $${total};
+      mensaje += `Total: $${total}`;
       const telefono = "18097630202"; // Tu número
-      const url = https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)};
+      const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
     }
   </script>
