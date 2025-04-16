@@ -104,77 +104,153 @@
       text-align: center;
     }
 
-    /* Mensaje "Agregado a tu carrito" */
-    #mensaje-carrito {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #28a745;
-      color: white;
-      padding: 20px;
-      border-radius: 10px;
-      font-size: 18px;
-      text-align: center;
-      z-index: 1000;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      opacity: 0;
-      transition: opacity 0.5s ease;
+    #carrito {
+      margin-top: 30px;
     }
 
-    /* Efecto para mostrar el mensaje */
-    .mostrar-mensaje {
+    #carrito ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #carrito li {
+      margin: 5px 0;
+    }
+
+    #whatsapp-btn {
       display: block;
-      opacity: 1;
-      transition: opacity 1s ease;
+      margin: 30px auto;
+      background-color: #25D366;
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 300px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #whatsapp-btn:hover {
+      background-color: #128C7E;
+    }
+
+    #mensaje {
+      margin-top: 20px;
+      font-size: 18px;
+      color: green;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <div id="logo">Logo</div>
+  <h1>Mi Tienda</h1>
 
-  <!-- Botones de categorías -->
   <div class="categoria-btns">
-    <button class="categoria-btn">Categoria 1</button>
-    <button class="categoria-btn">Categoria 2</button>
-    <button class="categoria-btn">Categoria 3</button>
+    <button class="categoria-btn" onclick="filtrarPorCategoria('todos')">Todos</button>
+    <button class="categoria-btn" onclick="filtrarPorCategoria('ropa')">Ropa</button>
+    <button class="categoria-btn" onclick="filtrarPorCategoria('electronica')">Electrónica</button>
+    <button class="categoria-btn" onclick="filtrarPorCategoria('hogar')">Hogar</button>
   </div>
 
-  <!-- Productos -->
-  <div class="productos">
-    <div class="producto">
-      <img src="https://via.placeholder.com/200" alt="Producto 1">
-      <h3>Producto 1</h3>
-      <p>Descripción del producto.</p>
-      <input type="number" class="cantidad" value="1" min="1">
-      <button onclick="agregarAlCarrito('Producto 1', 1)">Agregar al Carrito</button>
+  <div class="productos" id="lista-productos">
+    <div class="producto" data-categoria="ropa">
+      <img src="https://via.placeholder.com/200x180?text=Camiseta" alt="Camiseta">
+      <h3>Camiseta</h3>
+      <p>$15</p>
+      <input class="cantidad" type="number" value="1" min="1" id="cantidad-camiseta">
+      <button onclick="agregarAlCarrito('Camiseta', 15, document.getElementById('cantidad-camiseta').value)">Agregar</button>
     </div>
-    <div class="producto">
-      <img src="https://via.placeholder.com/200" alt="Producto 2">
-      <h3>Producto 2</h3>
-      <p>Descripción del producto.</p>
-      <input type="number" class="cantidad" value="1" min="1">
-      <button onclick="agregarAlCarrito('Producto 2', 1)">Agregar al Carrito</button>
+
+    <div class="producto" data-categoria="electronica">
+      <img src="https://via.placeholder.com/200x180?text=Auriculares" alt="Auriculares">
+      <h3>Auriculares</h3>
+      <p>$25</p>
+      <input class="cantidad" type="number" value="1" min="1" id="cantidad-auriculares">
+      <button onclick="agregarAlCarrito('Auriculares', 25, document.getElementById('cantidad-auriculares').value)">Agregar</button>
+    </div>
+
+    <div class="producto" data-categoria="hogar">
+      <img src="https://via.placeholder.com/200x180?text=Almohada" alt="Almohada">
+      <h3>Almohada</h3>
+      <p>$10</p>
+      <input class="cantidad" type="number" value="1" min="1" id="cantidad-almohada">
+      <button onclick="agregarAlCarrito('Almohada', 10, document.getElementById('cantidad-almohada').value)">Agregar</button>
     </div>
   </div>
 
-  <!-- Mensaje de agregado al carrito -->
-  <div id="mensaje-carrito">Agregado a tu carrito</div>
+  <div id="carrito">
+    <h2>Carrito de compras</h2>
+    <ul id="lista-carrito"></ul>
+    <p>Total: $<span id="total">0</span></p>
+    <button id="whatsapp-btn" onclick="enviarPorWhatsApp()">Enviar pedido por WhatsApp</button>
+  </div>
+
+  <div id="mensaje"></div>
 
   <script>
-    function agregarAlCarrito(producto, cantidad) {
-      // Mostrar el mensaje de agregado al carrito
-      let mensaje = document.getElementById("mensaje-carrito");
-      mensaje.classList.add("mostrar-mensaje");
+    let carrito = [];
+    let total = 0;
 
-      // Ocultar el mensaje después de 3 segundos
-      setTimeout(function() {
-        mensaje.classList.remove("mostrar-mensaje");
+    function agregarAlCarrito(producto, precio, cantidad) {
+      cantidad = parseInt(cantidad);
+      for (let i = 0; i < cantidad; i++) {
+        carrito.push({ producto, precio });
+        total += precio;
+      }
+      actualizarCarrito();
+      mostrarMensaje("Agregado a tu carrito");
+    }
+
+    function actualizarCarrito() {
+      const lista = document.getElementById("lista-carrito");
+      lista.innerHTML = "";
+      carrito.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.producto} - $${item.precio}`;
+        lista.appendChild(li);
+      });
+      document.getElementById("total").textContent = total;
+    }
+
+    function mostrarMensaje(mensaje) {
+      const mensajeDiv = document.getElementById("mensaje");
+      mensajeDiv.textContent = mensaje;
+      setTimeout(() => {
+        mensajeDiv.textContent = "";
       }, 3000);
+    }
 
-      // Aquí podrías agregar la lógica para agregar el producto al carrito.
-      console.log(`${producto} agregado con cantidad: ${cantidad}`);
+    function filtrarPorCategoria(categoria) {
+      const productos = document.querySelectorAll(".producto");
+
+      productos.forEach(producto => {
+        if (categoria === "todos" || producto.dataset.categoria === categoria) {
+          producto.style.display = "block";
+        } else {
+          producto.style.display = "none";
+        }
+      });
+    }
+
+    function enviarPorWhatsApp() {
+      if (carrito.length === 0) {
+        alert("El carrito está vacío.");
+        return;
+      }
+
+      let mensaje = "Hola, quiero hacer un pedido:\n";
+      carrito.forEach(item => {
+        mensaje += `• ${item.producto} - $${item.precio}\n`;
+      });
+      mensaje += `Total: $${total}`;
+
+      const telefono = "18097630202"; // Tu número actualizado
+      const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, "_blank");
     }
   </script>
 </body>
