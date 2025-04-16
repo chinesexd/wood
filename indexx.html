@@ -2,281 +2,370 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mi Tienda</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menú - Healthy Delicias</title>
+  <meta name="description" content="Healthy Delicias: comida saludable, postres deliciosos y desayunos únicos en Sajoma." />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background: #f9f9f9;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
     }
 
-    h1 {
+    h1, h2 {
+      color: #4CAF50;
       text-align: center;
+      padding: 10px;
+      font-size: 24px;
     }
 
-    #logo {
+    .logo {
       display: block;
       margin: 0 auto;
-      width: 100px;
-      height: 100px;
-      background-color: #ddd;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 100px;
-      font-weight: bold;
-      color: white;
-      font-size: 20px;
+      width: 80%;
+      max-width: 280px;
+      height: auto;
     }
 
-    .categoria-btns {
-      text-align: center;
-      margin-top: 20px;
+    .menu-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 20px;
     }
 
-    .categoria-btn {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      margin: 5px;
-      border-radius: 5px;
+    .frame {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 300px;
+      height: 550px; /* MÁS ALTO */
+      text-align: center;
+      transition: transform 0.3s;
+      margin: auto;
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
+    }
+
+    .frame:hover {
+      transform: scale(1.05);
+    }
+
+    .frame img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
       cursor: pointer;
-      transition: background-color 0.3s;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      margin-bottom: 10px;
     }
 
-    .categoria-btn:hover {
+    .frame-content {
+      padding: 20px;
+    }
+
+    .frame h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      margin-top: 5px;
+    }
+
+    .frame p {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 15px;
+    }
+
+    .add-btn {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .add-btn:hover {
       background-color: #45a049;
     }
 
-    .productos {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .producto {
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 10px;
-      width: 200px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
-    }
-
-    .producto:hover {
-      transform: scale(1.02);
-    }
-
-    .producto img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .producto img:hover {
-      transform: scale(1.1);
-    }
-
-    button {
-      margin-top: 10px;
-      padding: 6px 12px;
-      background-color: green;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .cantidad {
-      margin-top: 10px;
+    input[type="number"] {
+      width: 60px;
       padding: 5px;
-      font-size: 14px;
-      width: 50px;
       border-radius: 5px;
       border: 1px solid #ccc;
-      text-align: center;
+      margin-top: 5px;
     }
 
-    #carrito {
-      margin-top: 30px;
+    #pedido-resumen {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 500px;
+      margin: 20px auto;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    #carrito ul {
+    #pedido-resumen ul {
       list-style: none;
       padding: 0;
     }
 
-    #carrito li {
-      margin: 5px 0;
+    #pedido-resumen li {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #pedido-resumen li button {
+      background-color: #ff0000;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #pedido-resumen li button:hover {
+      background-color: #cc0000;
     }
 
     #whatsapp-btn {
       display: block;
-      margin: 30px auto;
+      margin: 20px auto 0;
       background-color: #25D366;
       color: white;
-      padding: 15px 30px;
+      border: none;
+      padding: 12px 20px;
       font-size: 18px;
-      font-weight: bold;
+      border-radius: 6px;
+      text-decoration: none;
       text-align: center;
-      border-radius: 8px;
-      width: 100%;
-      max-width: 300px;
-      cursor: pointer;
-      transition: background-color 0.3s;
     }
 
     #whatsapp-btn:hover {
-      background-color: #128C7E;
+      background-color: #1ebe5d;
     }
 
-    /* Estilo del mensaje */
-    #mensaje {
+    /* Estilo del mensaje temporal */
+    #mensaje-agregado {
       position: fixed;
-      top: 50%;
+      top: 20px;
       left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: rgba(0, 128, 0, 0.8);
+      transform: translateX(-50%);
+      background-color: #4CAF50;
       color: white;
-      padding: 15px 30px;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 10px;
-      display: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
       z-index: 9999;
-      animation: mostrarMensaje 1s ease-out;
+      display: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
 
-    /* Animación para el mensaje */
-    @keyframes mostrarMensaje {
-      0% {
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0;
-      }
+    .zoom-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    .zoom-overlay img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      margin-bottom: 20px;
+    }
+
+    .zoom-overlay button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: #ffffff;
+      cursor: pointer;
+    }
+
+    .zoom-overlay button:hover {
+      background-color: #f1f1f1;
+    }
+
+    .info-section {
+      margin: 40px 20px;
+      text-align: center;
+    }
+
+    .footer {
+      text-align: center;
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
-  <div id="logo">Logo</div>
-  <h1>Mi Tienda</h1>
 
-  <div class="categoria-btns">
-    <button class="categoria-btn" onclick="filtrarPorCategoria('todos')">Todos</button>
-    <button class="categoria-btn" onclick="filtrarPorCategoria('ropa')">Ropa</button>
-    <button class="categoria-btn" onclick="filtrarPorCategoria('electronica')">Electrónica</button>
-    <button class="categoria-btn" onclick="filtrarPorCategoria('hogar')">Hogar</button>
+  <img src="logo1.png" alt="Logo de Healthy Delicias" class="logo">
+  <h1>Menú de Healthy Delicias</h1>
+
+  <!-- Mensaje de agregado al carrito -->
+  <div id="mensaje-agregado">¡Se ha agregado a tu carrito al final de la página!</div>
+
+  <div class="menu-container" id="menu"></div>
+
+  <div id="pedido-resumen">
+    <h2>Resumen del Pedido</h2>
+    <ul id="lista-pedido"></ul>
+    <p><strong>Total: RD$ <span id="total">0.00</span></strong></p>
+    <a id="whatsapp-btn" href="#" target="_blank">Enviar Pedido por WhatsApp</a>
   </div>
 
-  <div class="productos" id="lista-productos">
-    <div class="producto" data-categoria="ropa">
-      <img src="https://via.placeholder.com/200x180?text=Camiseta" alt="Camiseta">
-      <h3>Camiseta</h3>
-      <p>$15</p>
-      <input class="cantidad" type="number" value="1" min="1" id="cantidad-camiseta">
-      <button onclick="agregarAlCarrito('Camiseta', 15, document.getElementById('cantidad-camiseta').value)">Agregar</button>
-    </div>
-
-    <div class="producto" data-categoria="electronica">
-      <img src="https://via.placeholder.com/200x180?text=Auriculares" alt="Auriculares">
-      <h3>Auriculares</h3>
-      <p>$25</p>
-      <input class="cantidad" type="number" value="1" min="1" id="cantidad-auriculares">
-      <button onclick="agregarAlCarrito('Auriculares', 25, document.getElementById('cantidad-auriculares').value)">Agregar</button>
-    </div>
-
-    <div class="producto" data-categoria="hogar">
-      <img src="https://via.placeholder.com/200x180?text=Almohada" alt="Almohada">
-      <h3>Almohada</h3>
-      <p>$10</p>
-      <input class="cantidad" type="number" value="1" min="1" id="cantidad-almohada">
-      <button onclick="agregarAlCarrito('Almohada', 10, document.getElementById('cantidad-almohada').value)">Agregar</button>
-    </div>
+  <div class="info-section">
+    <h2>Sobre Nosotros</h2>
+    <p>En Healthy Delicias cocinamos con pasión. Comida saludable, ingredientes frescos y un sabor inigualable.</p>
+    
+    <h2>Contactos</h2>
+    <p>Dirección: Calle Botoncillo, SAJOMA</p>
+    <p>Teléfono: 809-678-0179</p>
   </div>
 
-  <div id="carrito">
-    <h2>Carrito de compras</h2>
-    <ul id="lista-carrito"></ul>
-    <p>Total: $<span id="total">0</span></p>
-    <button id="whatsapp-btn" onclick="enviarPorWhatsApp()">Enviar pedido por WhatsApp</button>
+  <div class="footer">
+    © 2025 Healthy Delicias. Todos los derechos reservados.
   </div>
-
-  <div id="mensaje"></div>
 
   <script>
-    let carrito = [];
-    let total = 0;
-
-    function agregarAlCarrito(producto, precio, cantidad) {
-      cantidad = parseInt(cantidad);
-      for (let i = 0; i < cantidad; i++) {
-        carrito.push({ producto, precio });
-        total += precio;
+    const productos = [
+      {
+        nombre: 'Choco-Flan (Porción)',
+        precio: 150,
+        imagen: 'chocoflan.jpg',
+        descripcion: 'Bizcocho de chocolate y flan cremoso en un solo postre irresistible.'
+      },
+      {
+        nombre: 'Tres Leches con Frutas 9oz',
+        precio: 70,
+        imagen: '3leche.jpg',
+        descripcion: 'Bizcocho húmedo bañado en tres leches y cubierto con frutas frescas.'
+      },
+      {
+        nombre: 'Banana Bread con Chispas de Chocolate (Grande)',
+        precio: 400,
+        imagen: 'panguineo.jpg',
+        descripcion: 'Suave y sabroso pan de guineo casero.'
+      },
+      {
+        nombre: 'Tres Leches con Frutas 9oz',
+        precio: 70,
+        imagen: '3leche.jpg',
+        descripcion: 'Pastel tres leches con frutas frescas.'
       }
-      actualizarCarrito();
-      mostrarMensaje("Agregado a tu carrito");
-    }
+    ];
 
-    function actualizarCarrito() {
-      const lista = document.getElementById("lista-carrito");
-      lista.innerHTML = "";
-      carrito.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = `${item.producto} - $${item.precio}`;
-        lista.appendChild(li);
-      });
-      document.getElementById("total").textContent = total;
-    }
+    const carrito = [];
+    const menu = document.getElementById('menu');
+    const listaPedido = document.getElementById('lista-pedido');
+    const totalSpan = document.getElementById('total');
+    const whatsappBtn = document.getElementById('whatsapp-btn');
+    const mensajeAgregado = document.getElementById('mensaje-agregado');
 
-    function mostrarMensaje(mensaje) {
-      const mensajeDiv = document.getElementById("mensaje");
-      mensajeDiv.textContent = mensaje;
-      mensajeDiv.style.display = "block";
+    // Asegúrate de que el menú se carga correctamente
+    productos.forEach((producto, index) => {
+      const frame = document.createElement('div');
+      frame.className = 'frame';
+      frame.innerHTML = `
+        <img src="${producto.imagen}" alt="${producto.nombre}" onclick="zoomImagen('${producto.imagen}')">
+        <div class="frame-content">
+          <h3>${producto.nombre}</h3>
+          <p>${producto.descripcion}</p>
+          <p>RD$ ${producto.precio.toFixed(2)}</p>
+          <input type="number" id="cantidad-${index}" min="1" value="1">
+          <button class="add-btn" onclick="agregarPedido(${index})">Agregar al carrito</button>
+        </div>
+      `;
+      menu.appendChild(frame);
+    });
+
+    function agregarPedido(index) {
+      const cantidad = document.getElementById(`cantidad-${index}`).value;
+      const producto = productos[index];
+      const totalProducto = producto.precio * cantidad;
+
+      carrito.push({ ...producto, cantidad, total: totalProducto });
+
+      // Actualizar resumen
+      actualizarResumen();
+      // Mostrar mensaje de agregado
+      mensajeAgregado.style.display = 'block';
       setTimeout(() => {
-        mensajeDiv.style.display = "none";
-      }, 3000); // El mensaje se oculta después de 3 segundos
+        mensajeAgregado.style.display = 'none';
+      }, 2000);
     }
 
-    function filtrarPorCategoria(categoria) {
-      const productos = document.querySelectorAll(".producto");
-
-      productos.forEach(producto => {
-        if (categoria === "todos" || producto.dataset.categoria === categoria) {
-          producto.style.display = "block";
-        } else {
-          producto.style.display = "none";
-        }
-      });
+    function eliminarDelCarrito(index) {
+      carrito.splice(index, 1);
+      actualizarResumen();
     }
 
-    function enviarPorWhatsApp() {
-      if (carrito.length === 0) {
-        alert("El carrito está vacío.");
-        return;
+function actualizarResumen() {
+  listaPedido.innerHTML = '';
+  let total = 0;
+
+  carrito.forEach((item, index) => {
+    total += item.total;
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+      ${item.nombre} x${item.cantidad} - RD$${item.total.toFixed(2)}
+      <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
+    `;
+    listaPedido.appendChild(li);
+  });
+
+  totalSpan.textContent = total.toFixed(2);
+
+  // Generar mensaje de WhatsApp
+  let mensaje = 'Hola, me gustaría hacer el siguiente pedido:\n\n';
+  carrito.forEach(item => {
+    mensaje += `- ${item.nombre} x${item.cantidad} (RD$${item.total.toFixed(2)})\n`;
+  });
+  mensaje += `\nTotal: RD$${total.toFixed(2)}\n\nGracias.`;
+
+  // Codificar y actualizar el enlace
+  const telefono = '18096780179'; // Número sin guiones ni espacios
+  const enlace = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+  whatsappBtn.href = enlace;
+}
+    function zoomImagen(imagen) {
+      const overlay = document.createElement('div');
+      overlay.className = 'zoom-overlay';
+      overlay.innerHTML = `
+        <img src="${imagen}" alt="Zoomed image">
+        <button onclick="cerrarZoom()">Cerrar</button>
+      `;
+      document.body.appendChild(overlay);
+    }
+
+    function cerrarZoom() {
+      const overlay = document.querySelector('.zoom-overlay');
+      if (overlay) {
+        overlay.remove();
       }
-
-      let mensaje = "Hola, quiero hacer un pedido:\n";
-      carrito.forEach(item => {
-        mensaje += `• ${item.producto} - $${item.precio}\n`;
-      });
-      mensaje += `Total: $${total}`;
-
-      const telefono = "18097630202"; // Tu número actualizado
-      const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-      window.open(url, "_blank");
     }
   </script>
 </body>
 </html>
-
