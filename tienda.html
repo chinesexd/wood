@@ -67,35 +67,35 @@
       color: #555;
     }
 
-    /* Lightbox */
+    /* Lightbox añadido */
     #lightbox {
       display: none;
       position: fixed;
-      top: 0;
+      z-index: 9999;
       left: 0;
+      top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.85);
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.9);
       justify-content: center;
       align-items: center;
-      z-index: 2000;
     }
 
     #lightbox img {
       max-width: 90%;
-      max-height: 80%;
+      max-height: 90%;
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
     }
 
-    #cerrar-lightbox {
+    #lightbox .cerrar {
       position: absolute;
       top: 20px;
-      right: 40px;
+      right: 30px;
       font-size: 40px;
       color: white;
       cursor: pointer;
-      z-index: 2100;
+      z-index: 10000;
     }
   </style>
 </head>
@@ -123,10 +123,10 @@
     </div>
   </main>
 
-  <!-- Lightbox para mostrar imagen ampliada -->
-  <div id="lightbox" onclick="cerrarLightbox()">
-    <span id="cerrar-lightbox" onclick="cerrarLightbox()">×</span>
-    <img id="imagen-ampliada" src="" alt="Vista ampliada">
+  <!-- Lightbox (añadido) -->
+  <div id="lightbox">
+    <span class="cerrar" onclick="cerrarLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="Imagen ampliada">
   </div>
 
   <script>
@@ -137,21 +137,25 @@
     }
 
     setInterval(updateClock, 1000);
-    updateClock(); // Inicial
+    updateClock(); // inicial
 
     // Simulación de clima
     document.getElementById("weather").innerHTML = "25°C 🌤️<br>Ciudad";
 
-    // Mostrar imagen ampliada (lightbox)
+    // Función para abrir imagen en lightbox
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+
     document.querySelectorAll(".producto img").forEach(img => {
       img.addEventListener("click", () => {
-        document.getElementById("imagen-ampliada").src = img.src;
-        document.getElementById("lightbox").style.display = "flex";
+        lightboxImg.src = img.src;
+        lightbox.style.display = "flex";
       });
     });
 
     function cerrarLightbox() {
-      document.getElementById("lightbox").style.display = "none";
+      lightbox.style.display = "none";
+      lightboxImg.src = "";
     }
   </script>
 </body>
