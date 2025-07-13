@@ -113,5 +113,11 @@
             window.print();
         }
     </script>
+
+    <div id="notaContainer" style="margin-top: 20px;">
+    <h3 style="color: red; font-weight: bold; font-size: 14px;">Nota:</h3>
+    <textarea id="notaPersonal" placeholder="Escribe tu nota aquí..." oninput="actualizarNotaTexto()" style="width: 100%; height: 80px; border: 2px solid red; color: red; font-weight: bold; font-size: 14px; border-radius: 5px; padding: 5px;"></textarea>
+    <p id="notaTexto" style="display: none; color: red; font-weight: bold; font-size: 14px; white-space: pre-wrap;"></p>
+</div>
 </body>
 </html>
